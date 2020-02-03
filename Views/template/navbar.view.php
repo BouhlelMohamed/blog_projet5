@@ -1,4 +1,4 @@
-
+<?php session_start() ?>
   <!-- Topbar Start -->
   <div class="navbar-custom">
                         <ul class="list-unstyled topbar-right-menu float-right mb-0">
@@ -10,8 +10,7 @@
                                         <img src="https://img.icons8.com/wired/64/000000/client-management.png">                                    
                                     </span>
                                     <span>
-                                        <span class="account-user-name">Mohamed</span>
-                                        <span class="account-position">Founder</span>
+                                        <span class="account-user-name"><?= $_SESSION['username'] ?></span>
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">

@@ -25,11 +25,24 @@ class CommentManager extends Database
             $comment->setId($v['id']);
             $comment->setContent($v['content']);
             $comment->setState($v['state']);
+            $comment->setIdAuthor($v['id_user']);
+            $comment->setIdPost($v['id_post']);
             $comments[$index] = $comment;
             $index++;
         }
 
         return $comments;
+
+    }
+
+    public function findAuthor()
+    {
+        $query = Database::getPdo()->prepare("SELECT id_user,username FROM Comments INNER JOIN Users WHERE Comments.id_user = Users.id");
+        
+        $query->execute(['id' => 23]);
+
+        Database::dump($query->fetchAll());
+    
 
     }
 

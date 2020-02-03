@@ -27,7 +27,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Contenu</th>
+                                                        <th>Auteur</th>
+                                                        <th>Article</th>
+                                                        <th>Commentaire</th>
                                                         <th>Approuvé/Supprimer</th>
                                                     </tr>
                                                 </thead>
@@ -38,6 +40,8 @@
                                                     <tr>
                                                     
                                                         <td><?= $comment->getId();?></td>
+                                                        <td><?= $comment->getAuthor();?></td>
+                                                        <td><?= $comment->getIdPost();?></td>
                                                         <td><?= $comment->getContent();?></td>
                                                         <td class="table-action">
                                                             <?php if($comment->getState() == 0): { ?>

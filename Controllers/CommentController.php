@@ -9,7 +9,7 @@ class CommentController
         $commentManager = new CommentManager();
         
         $view = new View;
-        return $view->render("Views/Comments/showComments", array("comments" => $commentManager->findAllComments()));
+        return $view->render("Views/Comments/showComments", array("comments" => $commentManager->findAllComments()),$commentManager->findAuthor());
 
     }
 

@@ -8,8 +8,9 @@ class HomeController
     public function homePage()
     {
         $userManager = new UserManager();
+        $authentificationManager = new AuthentificationManager();
 
         $view = new View;
-        return $view->render("Views/home", array("users" => $userManager->findAllUsers()));
+        return $view->render("Views/home", array("users" => $userManager->findAllUsers(),$authentificationManager->login()));
     }
 }

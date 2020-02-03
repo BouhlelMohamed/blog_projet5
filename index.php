@@ -4,6 +4,7 @@ require_once "Controllers/UserController.php";
 require_once "Controllers/PostController.php";
 require_once "Controllers/CommentController.php";
 require_once "Controllers/Page404Controller.php";
+require_once "Controllers/AuthentificationController.php";
 
 require_once "Controllers/HomeController.php";
 require_once "Views/View.php";
@@ -66,3 +67,7 @@ path("deletePost?id=$id","PostController","deletePostPage");
 path("comments","CommentController","commentsPage");
 path("deleteComment?id=$id","CommentController","deleteCommentPage");
 path("validateComment?id=$id","CommentController","validateCommentPage");
+
+// Authentification
+path("register","AuthentificationController","registerPage");
+path("login","AuthentificationController","loginPage");

@@ -8,6 +8,13 @@ class Database
        
         return $database;
     }
+
+    public function dump($string)
+    {
+        echo "<pre>";
+        var_dump($string);
+        echo "</pre>";
+    }
 }
 
 
