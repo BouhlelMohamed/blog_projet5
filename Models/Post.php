@@ -1,7 +1,7 @@
 <?php
 
 
-class Post
+class Post extends AbstractEntity
 {
    private $id;
    private $title;
@@ -10,6 +10,14 @@ class Post
    private $createdAt;
    private $updateAt;
    private $idAuthor;
+
+   public function __construct(array $donnees = NULL)
+   {
+       if($donnees != NULL)
+       {
+           $this->hydrate($donnees);
+       }
+   }
 
    public function getId(): int
    {

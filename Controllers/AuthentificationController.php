@@ -15,7 +15,9 @@ class AuthentificationController
             $authentificationManager->register()
         ),
         "base.authentification");
-        }
+        
+    
+    }
 
     public function loginPage()
     {

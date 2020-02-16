@@ -1,7 +1,7 @@
 <?php
 
 
-class User
+class User extends AbstractEntity
 {
     private $id;
     private $lastName;
@@ -12,6 +12,14 @@ class User
     private $role;
     private $state;
     private $createdAt;
+
+    public function __construct(array $donnees = NULL)
+    {
+        if($donnees != NULL)
+        {
+            $this->hydrate($donnees);
+        }
+    }
 
     public function getId(): int
     {

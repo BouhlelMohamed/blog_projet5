@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
-        <title>Hyper - Responsive Bootstrap 4 Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/1200px-PHP-logo.svg.png">
 
         <!-- App css -->
         <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -20,15 +17,15 @@
             <div class="container">
                 <div class="row justify-content-center">
 
-    <?php echo $content; ?>
+    <?= $content; ?>
 
                 </div>
         </div>
     </div>
     
     <footer class="footer footer-alt">
-            2018 - 2019 © Hyper - Coderthemes.com
-        </footer>
+         <?php echo Date("Y") . " ©" . " Bouhlel Mohamed"; ?>
+    </footer>
 
         <!-- App js -->
         <script src="../assets/js/app.min.js"></script>

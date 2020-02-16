@@ -13,10 +13,10 @@
     <!-- LOGO -->
     <a href="" class="logo text-center">
         <span class="logo-lg">
-            <img src="../assets/images/logo.png" alt="" height="16">
+            <img style="width:120px;height:70px;margin-top: 30px;margin-bottom: 30px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Webysther_20160423_-_Elephpant.svg/350px-Webysther_20160423_-_Elephpant.svg.png" alt="" height="16">
         </span>
         <span class="logo-sm">
-            <img src="../assets/images/logo_sm.png" alt="" height="16">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Webysther_20160423_-_Elephpant.svg/350px-Webysther_20160423_-_Elephpant.svg.png" alt="" height="16">
         </span>
     </a>
 

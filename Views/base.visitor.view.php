@@ -7,9 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bouhlel | Mohamed </title>
-    <meta name="description" content="Alpha is a unique portfolio template built with bootstrap. It is perfect for CV/Resume, creative agency, personal portfolio and can easily be converted to suit your needs.">
-    <meta name="author" content="LionCoders" />
-    <link rel="icon" href="assets/visitor/images/favicon.ico" />
+    <link rel="icon" href="https://www.php.net/images/logos/new-php-logo.svg" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <link rel="stylesheet" href="assets/visitor/css/plugins.min.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="assets/visitor/css/style.css" type="text/css" media="screen" />
@@ -26,10 +24,16 @@
             <li id="close" class="menu-item"><i class="ion-ios-close-empty"></i></li>
         </ul>
     </div>
+<?php
 
+$width =  "'<script type='text/javascript'>
+document.write(screen.width);
+</script>'";
+
+?>
     <section class="home img-bg" style="background: url(https://wallpapercave.com/wp/wp1958176.jpg) #333; background-size: cover;">
         <div class="overlay light opacity5"></div>
-        <div class="container">
+        <div class="<?php if($width > 2200){echo "container";}?>">
             <div class="name-block">
                 <div class="name-block-container">
                     <h1><span>Bonjour, Je m'appelle</span>Bouhlel Mohamed</h1>

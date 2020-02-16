@@ -5,10 +5,8 @@
         <meta charset="utf-8" />
         <title><?= $title = "blog"; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="https://www.php.net/images/logos/new-php-logo.svg">
         <!-- Bootstrap toggle -->
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <!-- third party css -->
