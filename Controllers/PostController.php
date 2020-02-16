@@ -10,7 +10,10 @@ class PostController
         $post = new Post();
 
         $view = new View;
-        return $view->render("Views/Posts/showPosts", array("posts" => $postManager->findAllPosts()));
+        return $view->render("Views/admin/Posts/showPosts", 
+        array(
+            "posts" => $postManager->findAllPosts()
+        ));
 
     }
 
@@ -19,22 +22,28 @@ class PostController
         $postManager = new PostManager();
         
         $view = new View;
-        return $view->render("Views/Posts/showOnePost", array("post" => $postManager->findPostById(), 'author' => $postManager->getAuthorPost()));
+        return $view->render("Views/admin/Posts/showOnePost", 
+        array(
+            "post" => $postManager->findPostById(),
+            'author' => $postManager->getAuthorPost()
+        ));
 
     }
 
     public function updatePostPage()
     {
-        $postManager = new PostManager();
-        $postManager->updatePost();
         $id = $_REQUEST['id'];
+        $post = new Post($_POST);
+        $postManager = new PostManager();
+        $postManager->updatePost($post);
         header("location: post?id=$id");
     }
 
     public function insertPostPage()
     {
+        $post = new Post($_POST);
         $postManager = new PostManager();
-        $postManager->insertPost();
+        $postManager->insertPost($post);
         header('location: posts');
     }
 

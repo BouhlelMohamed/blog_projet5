@@ -19,12 +19,14 @@ class CommentManager extends Database
 
         $index = 0;
 
+        
         foreach($allComments as $v)
         {
-            $comment = new Comment;
+            $comment = new Comment($v);
+            /*
             $comment->setId($v['id']);
             $comment->setContent($v['content']);
-            $comment->setState($v['state']);
+            $comment->setState($v['state']);*/
             $comment->setIdAuthor($v['id_user']);
             $comment->setIdPost($v['id_post']);
             $comments[$index] = $comment;
@@ -35,15 +37,50 @@ class CommentManager extends Database
 
     }
 
-    public function findAuthor()
+
+    public function findCommentWithId()
     {
-        $query = Database::getPdo()->prepare("SELECT id_user,username FROM Comments INNER JOIN Users WHERE Comments.id_user = Users.id");
+        $query = Database::getPdo()->prepare("SELECT * FROM Comments WHERE id_post = :id AND state = 1");
         
-        $query->execute(['id' => 23]);
+        $query->execute(['id' => $_REQUEST['id']]);
+        
+        $comments = array();
 
-        Database::dump($query->fetchAll());
-    
+        $allComments = $query->fetchAll();
 
+        $index = 0;
+
+        
+        foreach($allComments as $v)
+        {
+            $comment = new Comment($v);
+            /*
+            $comment->setId($v['id']);
+            $comment->setContent($v['content']);
+            $comment->setState($v['state']);*/
+            $comment->setCreatedAt($v['created_at']);
+            $comment->setIdAuthor($v['id_user']);
+            $comment->setIdPost($v['id_post']);
+            $comments[$index] = $comment;
+            $index++;
+        }
+
+        return $comments;
+
+    }
+
+
+    public function insertComment($comment)
+    {
+            
+            $query = Database::getPdo()->prepare("INSERT INTO Comments (id_post,content,id_user) VALUES(:id_post,:content,:id_user)");
+            
+            $query->execute(array(
+            'id_post'     => $_REQUEST['id'],
+            'content'     => $comment->getContent(),
+            'id_user'     => $comment->getIdAuthor()
+        ));
+        
     }
 
     public function validateComment()

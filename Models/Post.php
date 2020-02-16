@@ -77,11 +77,11 @@ class Post
        return $this;
    }
 
-   public function getIdAuthor(): string
+   public function getIdAuthor(): ?string
    {
        return $this->idAuthor;
    }
-   public function setIdAuthor(string $idAuthor): self
+   public function setIdAuthor(?string $idAuthor): self
    {
        $this->idAuthor = $idAuthor;
 

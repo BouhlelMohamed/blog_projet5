@@ -9,7 +9,10 @@ class UserController
         $userManager = new UserManager();
         
         $view = new View;
-        return $view->render("Views/Users/showUsers", array("users" => $userManager->findAllUsers()));
+        return $view->render("Views/admin/Users/showUsers", 
+        array(
+            "users" => $userManager->findAllUsers())
+        );
 
     }
     public function oneUserPage()
@@ -17,14 +20,18 @@ class UserController
         $userManager = new UserManager();
         
         $view = new View;
-        return $view->render("Views/Users/showOneUser", array("user" => $userManager->findOneUserById()));
+        return $view->render("Views/admin/Users/showOneUser", 
+        array(
+            "user" => $userManager->findOneUserById()
+        ));
     }
 
     public function updateUserPage()
     {
+        $id = $_REQUEST['id'];
         $userManager = new UserManager();
         $userManager->updateUserWithId();
-        header("Location: users");
+        header("Location: user?id=$id");
     }
 
     public function validateUserPage()

@@ -5,8 +5,9 @@ require_once "Controllers/PostController.php";
 require_once "Controllers/CommentController.php";
 require_once "Controllers/Page404Controller.php";
 require_once "Controllers/AuthentificationController.php";
-
+require_once "Controllers/BlogController.php";
 require_once "Controllers/HomeController.php";
+
 require_once "Views/View.php";
 
 
@@ -15,7 +16,7 @@ require_once "Views/View.php";
 
 function path($link , $controllerName , $method){
 
-    $page = substr($_SERVER["REQUEST_URI"],1);
+    $page = substr($_SERVER["REQUEST_URI"],1    );
 
 
     
@@ -43,9 +44,17 @@ function path($link , $controllerName , $method){
 
 }
 
-$id = $_REQUEST['id'];
+$id = $_REQUEST['id'] ?? NULL;
 
-path("","HomeController","homePage");
+// ---- VISITOR ----
+path("","BlogController","homeVisitorPage");
+path("blog?id=$id","BlogController","onePostPage");
+path("blogInsertComment?id=$id","BlogController","insertCommentPage");
+
+
+
+// ---- ADMIN ----
+path("admin","HomeController","homePage");
 
 // Users
 path("users","UserController","usersPage");
@@ -71,3 +80,4 @@ path("validateComment?id=$id","CommentController","validateCommentPage");
 // Authentification
 path("register","AuthentificationController","registerPage");
 path("login","AuthentificationController","loginPage");
+path("logout","AuthentificationController","logoutPage");

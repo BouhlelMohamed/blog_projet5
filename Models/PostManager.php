@@ -51,6 +51,8 @@ class PostManager extends Database
         $post->setTitle($postById['title']);
         $post->setChapo($postById['chapo']);
         $post->setContent($postById['content']);
+        $post->setCreatedAt($postById['created_at']);
+        $post->setUpdateAt($postById['update_at']);
 
 
         return $post;
@@ -58,29 +60,33 @@ class PostManager extends Database
 
     public function updatePost()
     {
-        $query = Database::getPdo()->prepare("UPDATE Posts SET title = :title, chapo = :chapo, content = :content WHERE id = :id");
+        $query = Database::getPdo()->prepare("UPDATE Posts SET title = :title, chapo = :chapo, content = :content, update_at = NOW() WHERE id = :id");
         
         $result = $query->execute([
-            
+                          //$post->setTitle($_POST['title']),
+                          //$post->setChapo($_POST['chapo']),
+                          //$post->setContent($_POST['content']),
             "title"   =>  isset($_POST['title']) ? $_POST["title"] : NULL,
             "chapo"   =>  isset($_POST['chapo']) ? $_POST['chapo'] : NULL,
             "content" =>  isset($_POST['content']) ? $_POST['content'] : NULL,
             "id"      =>  $_REQUEST['id']
         ]);
+        
     }
 
-    public function insertPost()
+    public function insertPost($post)
     {
             
             $query = Database::getPdo()->prepare("INSERT INTO Posts (title,chapo, content) VALUES(:title,:chapo,:content)");
             
             $query->execute(array(
-            'title'     => $_POST['title'],
-            'chapo'     => $_POST['chapo'],          
-            'content'   => $_POST['content'],            
+            'title'     => $post->getTitle(),
+            'chapo'     => $post->getChapo(),          
+            'content'   => $post->getContent()          
         ));
         
     }
+
 
     public function getAuthorPost()
     {

@@ -1,7 +1,8 @@
 <?php
 
+require_once('AbstractEntity.php');
 
-class Comment
+class Comment extends AbstractEntity
 {
     private $id;
     private $content;
@@ -9,7 +10,16 @@ class Comment
     private $idAuthor;
     private $idPost;
     private $author;
+    private $createdAt;
 
+
+    public function __construct(array $donnees = NULL)
+    {
+        if($donnees != NULL)
+        {
+            $this->hydrate($donnees);
+        }
+    }
     public function getId(): int
     {
         return $this->id;
@@ -72,6 +82,17 @@ class Comment
     public function setAuthor(?string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

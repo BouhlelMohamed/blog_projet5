@@ -21,8 +21,6 @@ class AuthentificationManager extends Database
             'mdp'           => isset($hash) ? $hash : NULL,
         ]);
 
-        header("location: login");  
-
     }
 
     public function login()
@@ -44,9 +42,37 @@ class AuthentificationManager extends Database
                 'email' =>  $_POST['email'],
                 'mdp'   =>  $mdp
             ]);
-            header('location: /');
+            header('location: admin');
             session_start();
+            $queryForSession = Database::getPdo()->prepare("
+            SELECT username FROM Users 
+            WHERE email = :email");
+            $queryForSession->execute([
+                'email' =>  $_POST['email']
+            ]);
+            $username = $queryForSession->fetch()["username"];
+            $_SESSION['username'] = $username;
+
+            $queryForId = Database::getPdo()->prepare("
+            SELECT id FROM Users 
+            WHERE email = :email");
+            $queryForId->execute([
+                'email' =>  $_POST['email']
+            ]);
+            $id = $queryForId->fetch()["id"];
+            $_SESSION['id'] = $id;
+
+            $queryForRole = Database::getPdo()->prepare("
+            SELECT role FROM Users 
+            WHERE email = :email");
+            $queryForRole->execute([
+                'email' =>  $_POST['email']
+            ]);
+            $role = $queryForRole->fetch()["role"];
+            $_SESSION['role'] = $role;
+
         }
+
 
     }
 

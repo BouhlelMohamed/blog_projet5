@@ -7,11 +7,15 @@ class CommentController
     public function commentsPage()
     {
         $commentManager = new CommentManager();
-        
+        $findAllComments = $commentManager->findAllComments();
         $view = new View;
-        return $view->render("Views/Comments/showComments", array("comments" => $commentManager->findAllComments()),$commentManager->findAuthor());
+        return $view->render("Views/admin/Comments/showComments", 
+        array(
+            "comments" => $findAllComments
+        ));
 
     }
+
 
     public function validateCommentPage()
     {

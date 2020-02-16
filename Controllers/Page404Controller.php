@@ -8,6 +8,6 @@ class Page404
     {
 
         $view = new View;
-        return $view->render("Views/page404NotFound");
+        return $view->render("Views/admin/page404NotFound");
     }
 }
