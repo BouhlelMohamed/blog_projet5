@@ -8,10 +8,12 @@ class CommentController
     {
         $commentManager = new CommentManager();
         $findAllComments = $commentManager->findAllComments();
+        $authors = $commentManager->getAuthorFunction();
         $view = new View;
         return $view->render("Views/admin/Comments/showComments", 
         array(
-            "comments" => $findAllComments
+            "comments" => $findAllComments,
+            "authors"  => $authors
         ));
 
     }
@@ -19,8 +21,9 @@ class CommentController
 
     public function validateCommentPage()
     {
+        $comment = new Comment();
         $commentManager = new CommentManager();
-        $commentManager->validateComment();
+        $commentManager->validateComment($comment);
         header("Location: comments");
 
         //return $this->commentsPage();

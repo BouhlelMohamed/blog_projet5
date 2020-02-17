@@ -29,17 +29,17 @@ class AuthentificationManager extends Database
         SELECT mdp FROM Users 
         WHERE email = :email");
         $queryForMdp->execute([
-            'email' =>  $_POST['email']
+            'email' =>  $_POST['email'] ?? NULL
         ]);
         $motDePasse = $queryForMdp->fetch()["mdp"];
-        $mdp = password_verify($_POST['mdp'], $motDePasse); 
+        $mdp = password_verify($_POST['mdp'] ?? NULL, $motDePasse); 
         if(!empty($mdp == true))
         {
             $query = Database::getPdo()->prepare("
             SELECT * FROM Users 
             WHERE email = :email, mdp = :mdp");
             $query->execute([
-                'email' =>  $_POST['email'],
+                'email' =>  $_POST['email'] ?? NULL,
                 'mdp'   =>  $mdp
             ]);
             header('location: admin');
@@ -48,7 +48,7 @@ class AuthentificationManager extends Database
             SELECT username FROM Users 
             WHERE email = :email");
             $queryForSession->execute([
-                'email' =>  $_POST['email']
+                'email' =>  $_POST['email'] ?? NULL
             ]);
             $username = $queryForSession->fetch()["username"];
             $_SESSION['username'] = $username;
@@ -57,7 +57,7 @@ class AuthentificationManager extends Database
             SELECT id FROM Users 
             WHERE email = :email");
             $queryForId->execute([
-                'email' =>  $_POST['email']
+                'email' =>  $_POST['email'] ?? NULL
             ]);
             $id = $queryForId->fetch()["id"];
             $_SESSION['id'] = $id;
@@ -66,7 +66,7 @@ class AuthentificationManager extends Database
             SELECT role FROM Users 
             WHERE email = :email");
             $queryForRole->execute([
-                'email' =>  $_POST['email']
+                'email' =>  $_POST['email'] ?? NULL
             ]);
             $role = $queryForRole->fetch()["role"];
             $_SESSION['role'] = $role;

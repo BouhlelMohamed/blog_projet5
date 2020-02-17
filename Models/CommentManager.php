@@ -37,6 +37,34 @@ class CommentManager extends Database
 
     }
 
+    public function getAuthorFunction()
+    {
+        $query = Database::getPdo()->prepare(
+        "SELECT username,id_user FROM Users INNER JOIN Comments WHERE Users.id = Comments.id_user");
+        
+        $query->execute();
+
+        $authors = array();
+
+        $allAuthors = $query->fetchAll();
+
+        $index = 0;
+        
+        foreach($allAuthors as $v)
+        {
+            $comment = new Comment($v);
+            $comment->setIdAuthor($v['id_user']);
+            $comment->setAuthor($v['username']);
+            $authors[$index] = $comment;
+            $index++;
+        }
+
+        return $authors;
+
+        
+
+    }
+
 
     public function findCommentWithId()
     {

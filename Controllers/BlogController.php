@@ -27,10 +27,13 @@ class BlogController
         $postById = $postManager->findPostById();
         $commentWithId = $commentManager->findCommentWithId();
         $authorPost = $postManager->getAuthorPost();
+        $authorComment = $commentManager->getAuthorFunction();
         return $view->render("Views/visitor/blog/blog-post",array(
-            "post"     => $postById,
-            "comments" => $commentWithId,
-            "author"   => $authorPost),
+            "post"          => $postById,
+            "comments"      => $commentWithId,
+            "author"        => $authorPost,
+            "authorComment" => $authorComment
+        ),
             "base.onePost"
         );
             

@@ -38,9 +38,12 @@
                                                     {                                               
                                                     ?>
                                                     <tr>
-                                                    
                                                         <td><?= $comment->getId();?></td>
-                                                        <td><?= $comment->getIdAuthor();?></td>
+                                                        <?php  foreach($authors as $author): { 
+                                                        if($comment->getIdAuthor() == $author->getIdAuthor()){ ?>
+                                                        <td><?= $author->getAuthor();?></td>
+                                                        <?php }//if
+                                                        } endforeach; ?>
                                                         <td><?= $comment->getIdPost();?></td>
                                                         <td><?= $comment->getContent();?></td>
                                                         <td class="table-action">

@@ -35,7 +35,11 @@
                         <div class="single-comment justify-content-between d-flex">
                             <div class="user justify-content-between d-flex">
                                 <div class="desc">
-                                    <h5><a href="#"><?= $comment->getIdAuthor(); ?></a></h5>
+                                <?php  foreach($authorComment as $author): { 
+                                      if($comment->getIdAuthor() == $author->getIdAuthor()){ ?>
+                                    <h5><a href="#"><?= $author->getAuthor(); ?></a></h5>
+                                                        <?php }//if
+                                                        } endforeach; ?>
                                     <p class="date"><?= $comment->getCreatedAt(); ?></p>
                                     <p class="comment">
                                         <?= $comment->getContent(); ?>                                    </p>

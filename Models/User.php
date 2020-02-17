@@ -1,5 +1,6 @@
 <?php
 
+require_once('AbstractEntity.php');
 
 class User extends AbstractEntity
 {
