@@ -615,11 +615,11 @@ h2.about.menu-item:before {
 }
 
 h2.portfolio.menu-item:before {
-    content: '02';
+    content: '03';
 }
 
 h2.blog.menu-item:before {
-    content: '03';
+    content: '02';
 }
 
 h2.contact.menu-item:before {
@@ -661,8 +661,8 @@ h2.menu-item:after {
     background: #F1F3F6;
     position: fixed;
     height: 40px;
-    width: 69%;
-    right: 13px;
+    width: 70%;
+    right: 0.5px;
     top: -50px;
     transition: all 0.5s;
     z-index: 1;
@@ -2202,6 +2202,15 @@ h4.package {
 
 @media (min-width:2500px)
 {
+    .name-block
+    {
+        height: 532px!important;
+    }
+    .social
+    {
+        bottom:50px;
+    }
+
     #lionhero {
         height: 100vh;
         position: fixed;
@@ -2426,6 +2435,11 @@ h4.package {
 }
 
 @media (min-width:981px) and (max-width:1024px) {
+    .h2-contact
+    {
+        left:110px;
+        bottom:95px
+    }
     .name-block {
         -ms-transform: rotate(-34deg);
         -webkit-transform: rotate(-34deg);
@@ -2486,8 +2500,7 @@ h4.package {
     }
     .inline-menu-container {
         font-size: 14px;
-        right: 10px;
-        width: 69%;
+        width: 70%;
     }
     .inline-menu li {
         padding: 0 10px;
@@ -2937,4 +2950,6 @@ h4.package {
     .buy-now {
         display: none
     }
+    
 }
+

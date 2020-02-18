@@ -39,21 +39,24 @@
                                                     ?>
                                                     <tr>
                                                         <td><?= $comment->getId();?></td>
-                                                        <?php  foreach($authors as $author): { 
-                                                        if($comment->getIdAuthor() == $author->getIdAuthor()){ ?>
-                                                        <td><?= $author->getAuthor();?></td>
-                                                        <?php }//if
-                                                        } endforeach; ?>
-                                                        <td><?= $comment->getIdPost();?></td>
-                                                        <td><?= $comment->getContent();?></td>
-                                                        <td class="table-action">
-                                                            <?php if($comment->getState() == 0): { ?>
-                                                            <a  href="validateComment?id=<?= $comment->getId()  ?>"  class="action-icon"><img src="https://img.icons8.com/color/30/000000/approval--v1.png"></a>
-                                                            <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
-                                                            <?php }else:{  ?>
-                                                            <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
-                                                            <?php } endif;  ?>
 
+                                                        <?php $idAuthor = $comment->getIdAuthor(); ?>
+
+                                                        <?php foreach(array_unique($authors[$idAuthor]) as $author)?>
+
+                                                        <td><?php { echo $author; } ?></td>
+
+                                                        <td><?= $comment->getIdPost();?></td>
+
+                                                        <td><?= $comment->getContent();?></td>
+                                                        
+                                                        <td class="table-action">
+                                                        <?php if($comment->getState() == 0): { ?>
+                                                        <a  href="validateComment?id=<?= $comment->getId()  ?>"  class="action-icon"><img src="https://img.icons8.com/color/30/000000/approval--v1.png"></a>
+                                                        <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
+                                                        <?php }else:{  ?>
+                                                        <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
+                                                        <?php } endif;  ?>
                                                         </tr>
                                                     <?php  } endforeach; ?>
                                                 </tbody>

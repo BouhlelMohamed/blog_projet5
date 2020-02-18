@@ -65,7 +65,7 @@ document.write(screen.width);
                 </div>
                 <div class="contact-block  menu-block">
                     <div class="contact-block-container">
-                        <h2 class="contact menu-item">Contact</h2>
+                        <h2 class="contact menu-item h2-contact">Contact</h2>
                     </div>
                 </div>
             </div>

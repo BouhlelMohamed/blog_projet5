@@ -30,25 +30,26 @@
               </div>
 
                 <?php foreach($comments as $comment): { ?>
-                <div class="comments-area">
+                <?php $idAuthor = $comment->getIdAuthor(); ?>                             
+                <?php foreach(array_unique($authors[$idAuthor]) as $author): ?>
+
+                <div class="comments-area" style="padding:0!important">
                     <div class="comment-list">
                         <div class="single-comment justify-content-between d-flex">
                             <div class="user justify-content-between d-flex">
                                 <div class="desc">
-                                <?php  foreach($authorComment as $author): { 
-                                      if($comment->getIdAuthor() == $author->getIdAuthor()){ ?>
-                                    <h5><a href="#"><?= $author->getAuthor(); ?></a></h5>
-                                                        <?php }//if
-                                                        } endforeach; ?>
+                                    <h5><a><?php { echo $author; } endforeach; ?></a></h5>
                                     <p class="date"><?= $comment->getCreatedAt(); ?></p>
                                     <p class="comment">
-                                        <?= $comment->getContent(); ?>                                    </p>
+                                        <?= $comment->getContent(); ?>                                    
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                      </div>
                     </div>	
                 <?php } endforeach; ?>
-        <?php if(isset($_SESSION['username']) !== NULL && session_status() == PHP_SESSION_ACTIVE): ?> 
+        <?php if(!empty($_SESSION['username']) AND (!empty($_SESSION['id'])) !== NULL && session_status() == PHP_SESSION_ACTIVE): ?> 
 
                 <div class="comment-form">
                     <h4>Ajouter un commentaire</h4>

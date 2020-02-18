@@ -10,7 +10,7 @@ class PostManager extends Database
 
     public function findAllPosts()
     {
-        $query = Database::getPdo()->prepare("SELECT * FROM Posts");
+        $query = Database::getPdo()->prepare("SELECT * FROM Posts ORDER BY created_at DESC");
 
         $query->execute();
 

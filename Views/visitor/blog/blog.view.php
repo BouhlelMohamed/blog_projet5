@@ -10,16 +10,21 @@
                                     <div class="post-title">
                                         <a class="open-post" href="post?id=<?= $post->getId(); ?>"><h2><?= $post->getTitle(); ?></h2></a>
                                         <p class="post-info">
-                                            <span class="post-author">Auteur : <?= $post->getTitle(); ?></span>
+                                            <?php $idAuthor = $post->getIdAuthor(); ?>
+
+                                            <?php foreach(array_unique($authors[$idAuthor]) as $author): { ?>
+
+                                            <span class="post-author">Auteur : <?= ucfirst($author) ?></span>
+                                            <?php }endforeach ?>
                                             <span class="slash"></span>
-                                            <span class="post-date"><?= $post->getCreatedAt(); ?></span>
+                                            <span class="post-date"><?= $post->getUpdateAt(); ?></span>
                                             <span class="slash"></span>
                                             <span class="post-catetory"><?= $post->getChapo(); ?></span>
                                         </p>
                                     </div>
                                     <div class="post-body">
                                         <p><?= $post->getContent(); ?></p>
-                                            <a class="btn" href="blog?id=<?= $post->getId(); ?>">Read More</a>
+                                            <a class="btn" href="blog?id=<?= $post->getId(); ?>">Voir plus</a>
                                     </div>
                                 </div>
                                 <?php } endforeach; ?>
