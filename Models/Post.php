@@ -33,7 +33,7 @@ class Post extends AbstractEntity
 
    public function getTitle(): string
    {
-       return $this->title;
+       return Config::str_replaceUTF8($this->title);
    }
    public function setTitle(string $title): self
    {
@@ -44,7 +44,7 @@ class Post extends AbstractEntity
 
    public function getChapo(): string
    {
-       return $this->chapo;
+       return Config::str_replaceUTF8($this->chapo);
    }
    public function setChapo(string $chapo): self
    {
@@ -55,7 +55,7 @@ class Post extends AbstractEntity
 
    public function getContent(): string
    {
-       return $this->content;
+       return Config::str_replaceUTF8($this->content);
    }
    public function setContent(string $content): self
    {

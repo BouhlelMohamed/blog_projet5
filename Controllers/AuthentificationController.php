@@ -11,10 +11,7 @@ class AuthentificationController
 
         $view = new View;
         return $view->render("Views/admin/Authentifications/register",
-        array(
-            $authentificationManager->register()
-        ),
-        "base.authentification");
+        array($authentificationManager->register()),"base.authentification");
         
     
     }
@@ -22,7 +19,6 @@ class AuthentificationController
     public function loginPage()
     {
         $authentificationManager = new AuthentificationManager();
-
         $view = new View;
         return $view->render("Views/admin/Authentifications/login",
         array($authentificationManager->login()),"base.authentification");

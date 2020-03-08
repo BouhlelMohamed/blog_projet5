@@ -8,9 +8,9 @@ class HomeController
 {
     public function homePage()
     {
-        $userManager = new UserManager();
+        $userManager             = new UserManager();
         $authentificationManager = new AuthentificationManager();
-        $sessionManager = new SessionManager();
+        $sessionManager          = new SessionManager();
 
         $view = new View;
         return $view->render("Views/admin/home", array(

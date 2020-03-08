@@ -42,9 +42,9 @@
 
                                                         <?php $idAuthor = $comment->getIdAuthor(); ?>
 
-                                                        <?php foreach(array_unique($authors[$idAuthor]) as $author)?>
+                                                        <?php //array_unique($authors[$idAuthor]); ?>
 
-                                                        <td><?php { echo $author; } ?></td>
+                                                        <td><?php echo $authors[$idAuthor]["username"];  ?></td>
 
                                                         <td><?= $comment->getIdPost();?></td>
 

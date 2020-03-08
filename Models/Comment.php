@@ -33,7 +33,7 @@ class Comment extends AbstractEntity
 
     public function getContent(): string
     {
-        return $this->content;
+        return Config::str_replaceUTF8($this->content);
     }
     public function setContent(string $content): self
     {

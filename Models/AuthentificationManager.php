@@ -23,26 +23,30 @@ class AuthentificationManager extends Database
 
     }
 
+
     public function login()
     {
         $queryForMdp = Database::getPdo()->prepare("
         SELECT mdp FROM Users 
-        WHERE email = :email");
+        WHERE email = :email OR username = :email");
         $queryForMdp->execute([
+            //'email' =>  "admin@admin.com"
             'email' =>  $_POST['email'] ?? NULL
         ]);
         $motDePasse = $queryForMdp->fetch()["mdp"];
         $mdp = password_verify($_POST['mdp'] ?? NULL, $motDePasse); 
-        if(!empty($mdp == true))
+        //var_dump($mdp);
+        if(isset($mdp) && $mdp == true)
         {
             $query = Database::getPdo()->prepare("
             SELECT * FROM Users 
             WHERE email = :email, mdp = :mdp");
+            //var_dump('im here');
             $query->execute([
                 'email' =>  $_POST['email'] ?? NULL,
                 'mdp'   =>  $mdp
             ]);
-            header('location: admin');
+            header('Location: admin');
             session_start();
             $queryForSession = Database::getPdo()->prepare("
             SELECT username FROM Users 
@@ -71,7 +75,7 @@ class AuthentificationManager extends Database
             $role = $queryForRole->fetch()["role"];
             $_SESSION['role'] = $role;
 
-        }
+       }
 
 
     }

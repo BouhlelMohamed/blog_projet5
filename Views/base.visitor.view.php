@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <link rel="stylesheet" href="assets/visitor/css/plugins.min.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="assets/visitor/css/style.css" type="text/css" media="screen" />
+    <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="dark">
@@ -31,7 +32,7 @@ document.write(screen.width);
 </script>'";
 
 ?>
-    <section class="home img-bg" style="background: url(https://wallpapercave.com/wp/wp1958176.jpg) #333; background-size: cover;">
+    <section class="home img-bg" style="background: url(https://vironit-bevc00m.netdna-ssl.com/wp-content/uploads/2018/05/php_wallpaper_by_milesandryprower-d9o6yba.png) #333; background-size: cover;">
         <div class="overlay light opacity5"></div>
         <div class="<?php if($width > 2200){echo "container";}?>">
             <div class="name-block">
@@ -87,6 +88,9 @@ document.write(screen.width);
     <script src="assets/visitor/js/plugins.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmsb2nGLuIl04bt7CWJozRMhThvGa3y1w"></script>
     <script src="assets/visitor/js/main.js"></script>
+    <script src="assets/visitor/blog_details/js/jquery.ajaxchimp.min.js"></script>
+    <script src="assets/visitor/blog_details/vendors/jquery/jquery-3.2.1.min.js"></script>
+
 </body>
 
 

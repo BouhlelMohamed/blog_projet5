@@ -3,11 +3,11 @@
                     <div class="block-content">
                         <h3 class="block-title">CV</h3>
                         <h3 class="subheading">Présentation</h3>
-                        <p>Développeur PHP/SYMFONY talentueux avec un an d'expérience dans le développement web.</p>
+                        <p>Curieux, dynamique et ambitieux je suis un jeune développeur PHP/Symfony en quête de nouveaux défis !</p>
                         <div class="info-list row">
                             <div class="col-sm-6"><span>Nom & Prénom : </span> Bouhlel Mohamed</div>
                             <div class="col-sm-6"><span>Date de naissance : </span> 19 Février 1998 </div>
-                            <div class="col-sm-6"><span>Adresse : </span> Paris.</div>
+                            <div class="col-sm-6"><span>Adresse : </span>Île-de-France.</div>
                             <div class="col-sm-6"><span>Email : </span> mohamed.bouhleel@gmail.com</div>
                             <div class="col-sm-6"><span>Téléphone : </span> 07.08.80.33.01</div>
                         </div>

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "coffeecode/router": "^1.0"
+    }
+}

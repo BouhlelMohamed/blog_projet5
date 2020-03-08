@@ -1,4 +1,5 @@
- 
+<div class='alert alert-notif alert-primary' role='alert' style='display:none;position: absolute;z-index: 99;left: 800px;top: 70px;'>Le rôle d'utilisateur a bien été changé</div>
+
             <!--ICI CONTENT-->
             <br>
             <div class="card">
@@ -61,9 +62,9 @@
                                                     <?php } endif; ?>
                                                         <td>
                                                         <?php if($user->getRole() == 1): { ;?>
-                                                                <a href="roleAdmin?id=<?= $user->getId(); ?>" class="action-icon"><img src="https://img.icons8.com/color/30/000000/moderator-male--v1.png"></a>       
+                                                                <a href="roleAdmin?id=<?= $user->getId(); ?>" class="change-role-users action-icon"><img src="https://img.icons8.com/color/30/000000/moderator-male--v1.png"></a>       
                                                             <?php } elseif($user->getRole() == 0 && $user->getState() == 1):{ ?>
-                                                                <a href="roleUser?id=<?= $user->getId(); ?>" class="action-icon"><img src="https://img.icons8.com/officel/30/000000/user.png"></a>       
+                                                                <a href="roleUser?id=<?= $user->getId(); ?>" class="change-role-users action-icon"><img src="https://img.icons8.com/officel/30/000000/user.png"></a>       
                                                         <?php } endif; ?>
                                                         </td>
                                                     </tr>
@@ -84,4 +85,3 @@
         </div>
         </div>
         <!-- END wrapper -->
-

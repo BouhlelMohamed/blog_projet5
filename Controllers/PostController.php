@@ -32,8 +32,8 @@ class PostController
 
     public function updatePostPage()
     {
-        $id = $_REQUEST['id'];
-        $post = new Post($_POST);
+        $id          = $_REQUEST['id'];
+        $post        = new Post($_POST);
         $postManager = new PostManager();
         $postManager->updatePost($post);
         header("location: post?id=$id");
@@ -41,7 +41,7 @@ class PostController
 
     public function insertPostPage()
     {
-        $post = new Post($_POST);
+        $post        = new Post($_POST);
         $postManager = new PostManager();
         $postManager->insertPost($post);
         header('location: posts');
@@ -50,8 +50,14 @@ class PostController
     public function deletePostPage()
     {
         $postManager = new PostManager();
-        $postManager->deletePost();
+        $id = $_REQUEST['id'] ?? NULL;
+        echo $id;
+        if(!empty($id))
+        {
+            echo "avant";
+            $postManager->deletePost($id);
+            echo "aprés";
+        }        
         header('location: posts');
-
     }
 }

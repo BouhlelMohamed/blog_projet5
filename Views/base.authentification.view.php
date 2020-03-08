@@ -7,8 +7,8 @@
         <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/1200px-PHP-logo.svg.png">
 
         <!-- App css -->
-        <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -28,6 +28,6 @@
     </footer>
 
         <!-- App js -->
-        <script src="../assets/js/app.min.js"></script>
+        <script src="assets/js/app.min.js"></script>
     </body>
 </html>

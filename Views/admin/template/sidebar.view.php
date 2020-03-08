@@ -24,7 +24,7 @@
     <ul class="metismenu side-nav">
 
         <li class="side-nav-item">
-            <a href="/admin" class="side-nav-link">
+            <a href="admin" class="side-nav-link">
                 <i class="dripicons-meter"></i>
                 <span class="badge badge-success float-right"><?php // $countCommentsNotValidate + $countUsersNotValidate ?></span>
                 <span> Tableau de bord </span>

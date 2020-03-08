@@ -9,14 +9,16 @@ class BlogController
 {
 
     public function homeVisitorPage()
-    {        
-        $commentManager = new CommentManager();
+    {     
+        
         $postManager    = new PostManager;
         $view           = new View;
-        $authors        = $commentManager->getAuthorFunction();
-        return $view->render("Views/visitor/blog/blog",array(
+        $userManager    = new UserManager();
+        $authors        = $postManager->getAuthorPost();
+        return $view->render("Views/visitor/blog/blog",
+        array(
         "posts"         => $postManager->findAllPosts(),
-        "authors" => $authors
+        "authors"       => $authors,
         )
         ,"base.visitor");
             
@@ -24,13 +26,13 @@ class BlogController
 
     public function onePostPage()
     {
-        $postManager    = new PostManager;
+        $id = $_REQUEST['id'];
+        $postManager    = new PostManager();
         $commentManager = new CommentManager();
-        $comment        = new Comment();
-        $view           = new View;
+        $view           = new View();
         $postById       = $postManager->findPostById();
-        $commentWithId  = $commentManager->findCommentWithId();
-        $authorPost     = $postManager->getAuthorPost();
+        $commentWithId  = $commentManager->findCommentWithId((int)$id);
+        $authorPost     = $postManager->getAuthorPost((int)$id);
         $authors        = $commentManager->getAuthorFunction();
         return $view->render("Views/visitor/blog/blog-post",array(
             "post"          => $postById,
@@ -47,7 +49,8 @@ class BlogController
     {
         $commentManager = new CommentManager();
         $comment        = new Comment($_POST);
-        $commentManager->insertComment($comment);
+        $id = $_REQUEST['id'];
+        $commentManager->insertComment($comment,$id);
         $url = $_SERVER['HTTP_REFERER'];
         header("Location: $url");
     }

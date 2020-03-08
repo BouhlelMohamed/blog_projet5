@@ -1,6 +1,8 @@
 <?php
 
-class Database
+require_once('Config.php');
+
+class Database extends Config
 {
     public static function getPdo()
     {
@@ -9,12 +11,6 @@ class Database
         return $database;
     }
 
-    public function dump($string)
-    {
-        echo "<pre>";
-        var_dump($string);
-        echo "</pre>";
-    }
 }
 
 

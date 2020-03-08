@@ -19,7 +19,7 @@
 
                                 <form method="POST" action="login">
 
-                                <div class="form-group" >
+                                    <div class="form-group" >
                                         <label>Email</label>
                                         <input class="form-control"  name="email" required>
                                     </div>

@@ -10,12 +10,12 @@
         <!-- Bootstrap toggle -->
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <!-- third party css -->
-        <link href="../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
         <!-- third party css end -->
         <script src="https://kit.fontawesome.com/19c4d3f0ef.js" crossorigin="anonymous"></script>
         <!-- App css -->
-        <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -51,19 +51,18 @@
         <!-- end Footer -->
 
         <!-- bundle -->
-        <script src="../assets/js/app.min.js"></script>
-
+        <script src="assets/js/app.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <!-- third party js -->
-        <script src="../assets/js/vendor/Chart.bundle.min.js"></script>
-        <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="assets/js/vendor/Chart.bundle.min.js"></script>
+        <script src="assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
         <!-- third party js ends -->
-        <!-- bootstrap toggle -->
-
+        <script src="assets/jQuery/j.script.js"></script>
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
         <!-- demo app -->
-        <script src="../assets/js/pages/demo.dashboard.js"></script>
+        <script src="assets/js/pages/demo.dashboard.js"></script>
         <!-- end demo js-->
     </body>
 

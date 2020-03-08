@@ -42,7 +42,7 @@ class User extends AbstractEntity
 
     public function getLastName(): string
     {
-        return $this->lastName;
+        return Config::str_replaceUTF8($this->lastName);
     }
 
     public function setFirstName(string $firstName): self
@@ -54,7 +54,7 @@ class User extends AbstractEntity
 
     public function getFirstName(): string
     {
-        return $this->firstName;
+        return Config::str_replaceUTF8($this->firstName);
     }
 
     public function setEmail(string $email): self
@@ -78,7 +78,7 @@ class User extends AbstractEntity
 
     public function getUsername()
     {
-        return $this->username;
+        return Config::str_replaceUTF8($this->username);
     }
 
     public function setMdp(string $mdp): self

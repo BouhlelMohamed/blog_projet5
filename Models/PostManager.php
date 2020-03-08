@@ -10,7 +10,7 @@ class PostManager extends Database
 
     public function findAllPosts()
     {
-        $query = Database::getPdo()->prepare("SELECT * FROM Posts ORDER BY created_at DESC");
+        $query = Database::getPdo()->prepare("SELECT * FROM Posts  ORDER BY created_at DESC");
 
         $query->execute();
 
@@ -88,26 +88,37 @@ class PostManager extends Database
     }
 
 
-    public function getAuthorPost()
+    public function getAuthorPost($iPostId='')
     {
-
-        $query = Database::getPdo()->prepare("SELECT id_author
-        FROM Posts
-        WHERE id = :id");
-        $query->execute(['id'   =>  $_REQUEST['id']]);
-        $idAuthor = $query->fetch();
-        
-        $queryForAuthor = Database::getPdo()->prepare("SELECT username
-        FROM Users
-        WHERE id = :id");
-        $queryForAuthor->execute(['id'   =>  $idAuthor['id_author']]);
-        $result = $queryForAuthor->fetch();
-        return $result['username'];
+        if(isset($iPostId) && strlen($iPostId) != 0 && !empty($iPostId) && is_int($iPostId))
+        {
+            $sQuery = Database::getPdo()->prepare("SELECT p.id id_post,u.id id_user,u.username 
+            FROM Posts p 
+            INNER JOIN Users u
+            WHERE p.id = $iPostId 
+            AND p.id_author = u.id");
+            //var_dump($sQuery);die;
+        }
+        else
+        {
+            $sQuery = Database::getPdo()->prepare("SELECT p.id id_post,u.id id_user,u.username 
+            FROM Posts p 
+            INNER JOIN Users u
+            ON p.id_author = u.id GROUP BY u.id");
+        }
+        //var_dump($sQuery);
+        $sQuery->execute();
+        $aData = $sQuery->fetchAll();
+        //var_dump($aData);
+        if(isset($aData))
+        {
+            return $aData;
+        }
     }
 
-    public function deletePost()
+    public function deletePost(int $id)
     {
-        $query = Database::getPdo()->prepare("DELETE FROM Posts WHERE id = id LIMIT 1");
-        $query->execute(['id' => $_REQUEST['id']]);
+        $query = Database::getPdo()->prepare("DELETE FROM Posts WHERE id = :id LIMIT 1");
+        $query->execute(['id' => $id]);
     }
 }

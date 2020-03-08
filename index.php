@@ -1,83 +1,66 @@
 <?php
+header( 'content-type: text/html; charset=utf-8' );
 
 require_once "Controllers/UserController.php";
 require_once "Controllers/PostController.php";
 require_once "Controllers/CommentController.php";
-require_once "Controllers/Page404Controller.php";
+//require_once "Controllers/Page404Controller.php";
 require_once "Controllers/AuthentificationController.php";
 require_once "Controllers/BlogController.php";
 require_once "Controllers/HomeController.php";
-
 require_once "Views/View.php";
+require __DIR__ . "/vendor/autoload.php";
 
 
 
-
-
-function path($link , $controllerName , $method){
-
-    $page = substr($_SERVER["REQUEST_URI"],1    );
-
-
-    
-    if($page == $link)
+    function showPage(string $link)
     {
-        $controller = new $controllerName;
-        echo $controller->$method();
-    } 
-    /*else{
-        $controller = new Page404();
-        echo $controller->page404NotFound();
+        $id = $_REQUEST['id'] ?? NULL;
+        $path = 
+        array(
+            /* Home */
+            ''                      =>	array('controller' => 'BlogController','method' => 'homeVisitorPage'),
+            "blog?id=$id"           =>	array('controller' => 'BlogController','method' => 'onePostPage'),
+            "blogInsertComment?id=$id"=> array('controller' => 'BlogController','method' => 'insertCommentPage'),
+            /* Authentification */
+            'login'                 =>	array('controller' => 'AuthentificationController','method' => 'loginPage'),
+            'register'              =>	array('controller' => 'AuthentificationController','method' => 'registerPage'),
+            'logout'                =>	array('controller' => 'AuthentificationController','method' => 'logoutPage'),            
+            /* Admin */
+            'admin'                 =>	array('controller' => 'HomeController','method' => 'homePage'),
+            /* Comments */
+            'comments'              =>	array('controller' => 'CommentController','method' => 'commentsPage'),
+            "deleteComment?id=$id" =>	array('controller' => 'CommentController','method' => 'deleteCommentPage'),
+            "validateComment?id=$id"=>	array('controller' => 'CommentController','method' => 'validateCommentPage'),
+            /* Posts */
+            'posts'                 =>	array('controller' => 'PostController','method' => 'postsPage'),
+            'insertPost'            =>	array('controller' => 'PostController','method' => 'insertPostPage'),
+            "post?id=$id"           =>	array('controller' => 'PostController','method' => 'onePostPage'),
+            "updatePost?id=$id"     =>	array('controller' => 'PostController','method' => 'updatePostPage'),
+            "deletePost?id=$id"     =>	array('controller' => 'PostController','method' => 'deletePostPage'),
+            /* Users */
+            'users'                 =>	array('controller' => 'UserController','method' => 'usersPage'),
+            "user?id=$id"           =>	array('controller' => 'UserController','method' => 'oneUserPage'),
+            "deleteUser?id=$id"     =>	array('controller' => 'UserController','method' => 'deleteUserPage'),
+            "updateUser?id=$id"     =>	array('controller' => 'UserController','method' => 'updateUserPage'),
+            "validateUser?id=$id"   =>	array('controller' => 'UserController','method' => 'validateUserPage'),
+            "roleUser?id=$id"       =>	array('controller' => 'UserController','method' => 'userForAdminPage'),
+            "roleAdmin?id=$id"      =>	array('controller' => 'UserController','method' => 'adminForUserPage'),
+        );
 
-    }
-    */
-    /*switch($url)
-    {
-        case $link:
-            $controller = new $controllerName();
+        if($path[$link])
+        {
+            $controller = new $path[$link]['controller'];
+            $method = $path[$link]['method'];
             echo $controller->$method();
-        break;
-        case "/":
-            $controller = new HomeController;
-            echo $controller->homePage();
-    }*/
+        }
+        else
+        {
+            require_once 'Views/page404NotFound.view.php';
+        }
+    }
+    
+    //$link = substr($_SERVER["REQUEST_URI"], 4);
+    $link = substr($_SERVER["REQUEST_URI"], 1);
 
-}
-
-$id = $_REQUEST['id'] ?? NULL;
-
-// ---- VISITOR ----
-path("","BlogController","homeVisitorPage");
-path("blog?id=$id","BlogController","onePostPage");
-path("blogInsertComment?id=$id","BlogController","insertCommentPage");
-
-
-
-// ---- ADMIN ----
-path("admin","HomeController","homePage");
-
-// Users
-path("users","UserController","usersPage");
-path("user?id=$id","UserController","oneUserPage");
-path("deleteUser?id=$id","UserController","deleteUserPage");
-path("updateUser?id=$id","UserController","updateUserPage");
-path("validateUser?id=$id","UserController","validateUserPage");
-path("roleUser?id=$id","UserController","userForAdminPage");
-path("roleAdmin?id=$id","UserController","adminForUserPage");
-
-// Posts
-path("posts","PostController","postsPage");
-path("insertPost","PostController","insertPostPage");
-path("post?id=$id","PostController","onePostPage");
-path("updatePost?id=$id","PostController","updatePostPage");
-path("deletePost?id=$id","PostController","deletePostPage");
-
-// Comments
-path("comments","CommentController","commentsPage");
-path("deleteComment?id=$id","CommentController","deleteCommentPage");
-path("validateComment?id=$id","CommentController","validateCommentPage");
-
-// Authentification
-path("register","AuthentificationController","registerPage");
-path("login","AuthentificationController","loginPage");
-path("logout","AuthentificationController","logoutPage");
+    showPage($link);

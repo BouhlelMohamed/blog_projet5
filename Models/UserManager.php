@@ -8,7 +8,7 @@ class UserManager extends Database
 
     public function findAllUsers() 
     {
-        $query = Database::getPdo()->prepare("SELECT * FROM Users"); 
+        $query = Database::getPdo()->prepare("SELECT * FROM Users ORDER BY created_at DESC"); 
         
         $query->execute();
   
@@ -109,4 +109,18 @@ class UserManager extends Database
         $query->execute(['id' =>  $_REQUEST['id']]);
     }
 
+    public function getAuthorPosts()
+    {
+        $query = Database::getPdo()->prepare(
+        "SELECT id_author,username FROM Users INNER JOIN Posts ON Users.id = Posts.id_author");
+        
+        $query->execute();
+
+        $authors = array();
+
+        $authors = $query->fetchAll(PDO::FETCH_UNIQUE);
+
+        return $authors;
+
+    }
 }
