@@ -39,7 +39,7 @@ class CommentManager extends Database
         if(isset($id) && !empty($id) && is_int($id))
         {
             $query = Database::getPdo()->prepare("SELECT * FROM Comments WHERE id_post = :id AND state = 1");
-            $execute = $query->execute(['id' => (int)$id]);
+            $query->execute(['id' => (int)$id]);
                 $comments = array();
                 $allComments = $query->fetchAll();
                 $index = 0;

@@ -8,7 +8,6 @@ class BlogController
         
         $postManager    = new PostManager;
         $view           = new View;
-        $userManager    = new UserManager();
         $authors        = $postManager->getAuthorPost();
         return $view->render("Views/visitor/blog/blog",
         array(

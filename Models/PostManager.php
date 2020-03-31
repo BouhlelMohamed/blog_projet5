@@ -34,7 +34,7 @@ class PostManager extends Database
     public function updatePost($post,$id)
     {
         $query = Database::getPdo()->prepare("UPDATE Posts SET title = :title, chapo = :chapo, content = :content, update_at = NOW() WHERE id = :id");
-        $result = $query->execute([
+        $query->execute([
             'title'   =>  htmlentities($post->getTitle()),
             "chapo"   =>  htmlentities($post->getChapo()), 
             "content" =>  htmlentities($post->getContent()),

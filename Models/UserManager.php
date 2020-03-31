@@ -38,7 +38,7 @@ class UserManager extends Database
     public function updateUserWithId($user,$id)
     {
         $query = Database::getPdo()->prepare("UPDATE Users SET firstName = :firstName ,lastName = :lastName, email = :email, username = :username  WHERE id= :id LIMIT 1");
-        $result = $query->execute(
+        $query->execute(
             [
                 'firstName'     => htmlentities($user->getFirstName()),
                 'lastName'      => htmlentities($user->getLastName()),
