@@ -1,6 +1,5 @@
 <?php
 
-    require_once('./Models/CommentManager.php');
 
 class CommentController
 {
@@ -9,11 +8,18 @@ class CommentController
         $commentManager  = new CommentManager();
         $findAllComments = $commentManager->findAllComments();
         $authors         = $commentManager->getAuthorFunction();
+        $successMessageValidateComment = $_SESSION['successMessageValidateComment'] ?? NULL;
+        unset($_SESSION['successMessageValidateComment']);
+        $successMessageForDeleteComment = $_SESSION['successMessageForDeleteComment'] ?? NULL;
+        unset($_SESSION['successMessageForDeleteComment']);
         $view            = new View;
         return $view->render("Views/admin/Comments/showComments", 
         array(
             "comments" => $findAllComments,
-            "authors"  => $authors
+            "authors"  => $authors,
+            "successMessageValidateComment" => $successMessageValidateComment,
+            "successMessageForDeleteComment" => $successMessageForDeleteComment
+
         ));
 
     }
@@ -21,9 +27,11 @@ class CommentController
 
     public function validateCommentPage()
     {
+        $id = $_REQUEST['id'];
         $comment        = new Comment();
         $commentManager = new CommentManager();
-        $commentManager->validateComment($comment);
+        $commentManager->validateComment($id,$comment);
+        $_SESSION['successMessageValidateComment'] = '<div class="alert alert-notif alert-info" style="background-color: #1dff63;color: black;">Le commentaire a bien été validé</div>';
         header("Location: comments");
 
         //return $this->commentsPage();
@@ -32,8 +40,10 @@ class CommentController
 
     public function deleteCommentPage()
     {
+        $id = $_REQUEST['id'];
         $commentManager = new CommentManager();
-        $commentManager->deleteComment();
+        $commentManager->deleteComment($id);
+        $_SESSION['successMessageForDeleteComment'] = '<div class="alert alert-notif alert-info" style="background-color:#ff0000b3;">Le commentaire a bien été supprimé</div>';
         header("Location: comments");
     }
 }

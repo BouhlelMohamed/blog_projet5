@@ -1,4 +1,13 @@
-
+    <?php 
+        if(!empty($successMessageDeletePost))
+        {
+            echo $successMessageDeletePost;
+        }
+        elseif(!empty($successMessageAddPost))
+        {
+            echo $successMessageAddPost;
+        }
+    ?>
             <!--ICI CONTENT-->
             <br>
             <div class="card">
@@ -48,7 +57,7 @@
                                                         <td><?= $post->getCreatedAt();?></td>                                                              
                                                         <td class="table-action">
                                                             <a href="post?id=<?= $post->getId() ?>" class="action-icon"><img src="https://img.icons8.com/dusk/25/000000/edit.png" title="Modifier"></a>
-                                                            <a href="deletePost?id=<?= $post->getId() ?>" class="action-icon"><img src="https://img.icons8.com/dusk/25/000000/filled-trash.png" title="Supprimer"></a>
+                                                            <a href="deletePost?id=<?= $post->getId() ?>" class="action-icon delete-icon-user"><img src="https://img.icons8.com/dusk/25/000000/filled-trash.png" title="Supprimer"></a>
                                                         </td>
                                                     </tr>
                                                     <?php  } endforeach; ?>
@@ -76,6 +85,7 @@
                                     <div class="modal-body">
                                         <form class="pl-3 pr-3" method="POST" action="insertPost">
                                             <div class="form-group">
+                                            <input style="display:none" value="<?= $_SESSION["id"]; ?>" name="idAuthor" type="text">
                                                 <label>Titre :</label>
                                                 <input class="form-control" name="title" type="text">
                                             </div>
@@ -87,10 +97,10 @@
 
                                             <div class="form-group">
                                                 <label>Texte :</label>
-                                                <textarea class="form-control" name="content"></textarea>
+                                                <textarea class="form-control" rows="10" name="content"></textarea>
                                             </div>
                                             <div class="form-group text-center">
-                                                <button class="btn btn-primary" type="submit">Ajouter</button>
+                                                <button class="btn btn-primary" type="submit" >Ajouter</button>
                                             </div>
                                         </form>
                                     </div>

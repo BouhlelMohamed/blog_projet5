@@ -53,5 +53,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Bouhl
   <script src="assets/visitor/blog_details/js/jquery.ajaxchimp.min.js"></script>
   <script src="assets/visitor/blog_details/js/mail-script.js"></script>
   <script src="assets/visitor/blog_details/js/main.js"></script>
+  <script src="assets/jQuery/j.script.js"></script>
 </body>
 </html>

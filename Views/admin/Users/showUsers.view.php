@@ -1,4 +1,16 @@
-<div class='alert alert-notif alert-primary' role='alert' style='display:none;position: absolute;z-index: 99;left: 800px;top: 70px;'>Le rôle d'utilisateur a bien été changé</div>
+<?php if(!empty($successMessage))
+        {
+            echo $successMessage;
+        }
+        elseif(!empty($successMessageValidateUser))
+        {
+            echo $successMessageValidateUser;
+        }
+        elseif(!empty($successMessageForDeleteUser))
+        {
+            echo $successMessageForDeleteUser;
+        }
+?>
 
             <!--ICI CONTENT-->
             <br>
@@ -53,12 +65,12 @@
                                                         <td class="table-action">
                                                     <?php if($user->getState() == 0): { ;?>
                                                         <a href="user?id=<?= $user->getId(); ?>" class="action-icon"><img src="https://img.icons8.com/office/30/000000/find-user-male--v1.png"></a>
-                                                        <a href="deleteUser?id=<?= $user->getId(); ?>" class="action-icon"> <img src="https://img.icons8.com/office/30/000000/remove-user-male--v1.png"></a>
+                                                        <a href="deleteUser?id=<?= $user->getId(); ?>" class="delete-icon-user action-icon"> <img src="https://img.icons8.com/office/30/000000/remove-user-male--v1.png"></a>
                                                         <a  href="validateUser?id=<?= $user->getId();  ?>"  class="action-icon"><img src="https://img.icons8.com/office/30/000000/checked-user-male--v1.png"></a>    
                                                     </td>
                                                     <?php }else:{ ?>
                                                                 <a href="user?id=<?= $user->getId(); ?>" class="action-icon"><img src="https://img.icons8.com/office/30/000000/find-user-male--v1.png"></a>                                                            
-                                                                <a href="deleteUser?id=<?= $user->getId(); ?>" class="action-icon"><img src="https://img.icons8.com/office/30/000000/remove-user-male--v1.png"></a>                                                                                                                        
+                                                                <a href="deleteUser?id=<?= $user->getId(); ?>" class="delete-icon-user action-icon"><img src="https://img.icons8.com/office/30/000000/remove-user-male--v1.png"></a>                                                                                                                        
                                                     <?php } endif; ?>
                                                         <td>
                                                         <?php if($user->getRole() == 1): { ;?>

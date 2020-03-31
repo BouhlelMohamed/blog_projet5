@@ -1,18 +1,21 @@
 <?php
 
-    require_once('./Models/PostManager.php');
-
 class PostController
 {
     public function postsPage()
     {
         $postManager = new PostManager();
-        $post = new Post();
-
+        $successMessageDeletePost = $_SESSION['successMessageDeletePost'] ?? NULL;
+        $successMessageAddPost = $_SESSION['successMessageAddPost'] ?? NULL;
+        unset($_SESSION['successMessageDeletePost']);
+        unset($_SESSION['successMessageAddPost']);
         $view = new View;
         return $view->render("Views/admin/Posts/showPosts", 
         array(
-            "posts" => $postManager->findAllPosts()
+            "posts" => $postManager->findAllPosts(),
+            "successMessageDeletePost" => $successMessageDeletePost,
+            "successMessageAddPost" => $successMessageAddPost
+
         ));
 
     }
@@ -20,12 +23,16 @@ class PostController
     public function onePostPage()
     {
         $postManager = new PostManager();
-        
+        $id = $_REQUEST['id'];
+        $successMessageUpdatePost = $_SESSION['successMessageUpdatePost'] ?? NULL;
+        unset($_SESSION['successMessageUpdatePost']);
+        $post = $postManager->findPostById($id);
         $view = new View;
         return $view->render("Views/admin/Posts/showOnePost", 
         array(
-            "post" => $postManager->findPostById(),
-            'author' => $postManager->getAuthorPost()
+            "post"   => $post,
+            'author' => $postManager->getAuthorPost($id),
+            'successMessageUpdatePost' => $successMessageUpdatePost
         ));
 
     }
@@ -35,7 +42,8 @@ class PostController
         $id          = $_REQUEST['id'];
         $post        = new Post($_POST);
         $postManager = new PostManager();
-        $postManager->updatePost($post);
+        $postManager->updatePost($post,$id);
+        $_SESSION['successMessageUpdatePost'] = '<div class="alert alert-notif alert-info" style="background-color: #1dff63;color: black;">Votre article a bien été modifié</div>';
         header("location: post?id=$id");
     }
 
@@ -44,6 +52,7 @@ class PostController
         $post        = new Post($_POST);
         $postManager = new PostManager();
         $postManager->insertPost($post);
+        $_SESSION['successMessageAddPost'] = '<div class="alert alert-notif alert-info" style="background-color: rgb(29, 192, 255);">L\'article a bien été créé</div>';
         header('location: posts');
     }
 
@@ -51,12 +60,10 @@ class PostController
     {
         $postManager = new PostManager();
         $id = $_REQUEST['id'] ?? NULL;
-        echo $id;
+        $_SESSION['successMessageDeletePost'] = '<div class="alert alert-notif alert-info" style="background-color:#ff0000b3;">Votre article a bien été supprimé</div>';
         if(!empty($id))
         {
-            echo "avant";
             $postManager->deletePost($id);
-            echo "aprés";
         }        
         header('location: posts');
     }

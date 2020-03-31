@@ -1,7 +1,5 @@
 <?php
 
-require_once('AbstractEntity.php');
-
 class Post extends AbstractEntity
 {
    private $id;
@@ -20,7 +18,7 @@ class Post extends AbstractEntity
        }
    }
 
-   public function getId(): int
+   public function getId()
    {
        return $this->id;
    }
@@ -33,7 +31,7 @@ class Post extends AbstractEntity
 
    public function getTitle(): string
    {
-       return Config::str_replaceUTF8($this->title);
+       return $this->title;
    }
    public function setTitle(string $title): self
    {
@@ -44,7 +42,7 @@ class Post extends AbstractEntity
 
    public function getChapo(): string
    {
-       return Config::str_replaceUTF8($this->chapo);
+       return $this->chapo;
    }
    public function setChapo(string $chapo): self
    {
@@ -55,7 +53,7 @@ class Post extends AbstractEntity
 
    public function getContent(): string
    {
-       return Config::str_replaceUTF8($this->content);
+       return $this->content;
    }
    public function setContent(string $content): self
    {

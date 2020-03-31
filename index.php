@@ -1,17 +1,21 @@
 <?php
 header( 'content-type: text/html; charset=utf-8' );
-
-require_once "Controllers/UserController.php";
+session_start();
+/* require_once "Controllers/UserController.php";
 require_once "Controllers/PostController.php";
 require_once "Controllers/CommentController.php";
 //require_once "Controllers/Page404Controller.php";
 require_once "Controllers/AuthentificationController.php";
 require_once "Controllers/BlogController.php";
 require_once "Controllers/HomeController.php";
-require_once "Views/View.php";
+require_once "Views/View.php"; */
 require __DIR__ . "/vendor/autoload.php";
+require_once "autoload.php";
 
-
+/** DONNEES DE CONFIGURATION DU SITE                    **/
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 
     function showPage(string $link)
     {
@@ -22,6 +26,7 @@ require __DIR__ . "/vendor/autoload.php";
             ''                      =>	array('controller' => 'BlogController','method' => 'homeVisitorPage'),
             "blog?id=$id"           =>	array('controller' => 'BlogController','method' => 'onePostPage'),
             "blogInsertComment?id=$id"=> array('controller' => 'BlogController','method' => 'insertCommentPage'),
+            "?send=1"                =>	array('controller' => 'BlogController','method' => 'homeVisitorPage'),
             /* Authentification */
             'login'                 =>	array('controller' => 'AuthentificationController','method' => 'loginPage'),
             'register'              =>	array('controller' => 'AuthentificationController','method' => 'registerPage'),
@@ -48,7 +53,7 @@ require __DIR__ . "/vendor/autoload.php";
             "roleAdmin?id=$id"      =>	array('controller' => 'UserController','method' => 'adminForUserPage'),
         );
 
-        if($path[$link])
+        if(isset($path[$link]))
         {
             $controller = new $path[$link]['controller'];
             $method = $path[$link]['method'];
@@ -61,6 +66,6 @@ require __DIR__ . "/vendor/autoload.php";
     }
     
     //$link = substr($_SERVER["REQUEST_URI"], 4);
-    $link = substr($_SERVER["REQUEST_URI"], 1);
+    $link = substr($_SERVER["REQUEST_URI"], 4);
 
     showPage($link);

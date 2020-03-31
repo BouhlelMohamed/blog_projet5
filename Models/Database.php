@@ -1,12 +1,10 @@
 <?php
 
-require_once('Config.php');
-
-class Database extends Config
+class Database  
 {
     public static function getPdo()
     {
-        $database = new PDO('mysql:host=localhost;dbname=blog_p5;charset=utf8', 'admin', '1234');
+        $database = new PDO("mysql:host=localhost;dbname=mohabsat_projet5", "mohabsat_mohamed3", "Mohamed369852.");
        
         return $database;
     }

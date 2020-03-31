@@ -1,3 +1,9 @@
+        <?php 
+            if(!empty($successMessageAddUser))
+            {
+                echo $successMessageAddUser;
+            }
+        ?>
     <head>
         <title>Connexion</title>
     </head>

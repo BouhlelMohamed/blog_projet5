@@ -1,10 +1,5 @@
 <?php
 
-    
-require_once('./Models/PostManager.php');
-require_once('./Models/CommentManager.php');
-
-
 class BlogController
 {
 
@@ -27,10 +22,15 @@ class BlogController
     public function onePostPage()
     {
         $id = $_REQUEST['id'];
-        $postManager    = new PostManager();
+        $postManager    = new PostManager;
         $commentManager = new CommentManager();
-        $view           = new View();
-        $postById       = $postManager->findPostById();
+        $view           = new View;
+        $postById       = $postManager->findPostById($id);
+        if($postById == null)
+        {
+            $page404Controller = new Page404Controller();
+            return $page404Controller->page404NotFound();
+        }
         $commentWithId  = $commentManager->findCommentWithId((int)$id);
         $authorPost     = $postManager->getAuthorPost((int)$id);
         $authors        = $commentManager->getAuthorFunction();

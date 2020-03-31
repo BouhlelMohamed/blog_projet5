@@ -1,3 +1,15 @@
+<?php if(!empty($successMessageValidateComment))
+        {
+            echo $successMessageValidateComment;
+        }
+        if(!empty($successMessageForDeleteComment))
+        {
+            echo $successMessageForDeleteComment;
+        }
+        
+        
+        ?>
+
             <!--ICI CONTENT-->
             <br>
             <div class="card">
@@ -46,16 +58,16 @@
 
                                                         <td><?php echo $authors[$idAuthor]["username"];  ?></td>
 
-                                                        <td><?= $comment->getIdPost();?></td>
+                                                        <td>Article N° <?= $comment->getIdPost();?></td>
 
                                                         <td><?= $comment->getContent();?></td>
                                                         
                                                         <td class="table-action">
                                                         <?php if($comment->getState() == 0): { ?>
                                                         <a  href="validateComment?id=<?= $comment->getId()  ?>"  class="action-icon"><img src="https://img.icons8.com/color/30/000000/approval--v1.png"></a>
-                                                        <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
+                                                        <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon delete-comment-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
                                                         <?php }else:{  ?>
-                                                        <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
+                                                        <a href="deleteComment?id=<?= $comment->getId()  ?>" class="action-icon delete-comment-icon"><img src="https://img.icons8.com/plasticine/30/000000/filled-trash.png"></a></td>
                                                         <?php } endif;  ?>
                                                         </tr>
                                                     <?php  } endforeach; ?>

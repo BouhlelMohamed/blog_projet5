@@ -1,4 +1,3 @@
-<?php session_start(); ?>
   <!--================ Start Blog Post Area =================-->
   <section class="blog-post-area section-margin">
     <div class="container">

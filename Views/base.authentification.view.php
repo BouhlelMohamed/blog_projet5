@@ -29,5 +29,6 @@
 
         <!-- App js -->
         <script src="assets/js/app.min.js"></script>
+        <script src="assets/jQuery/j.script.js"></script>
     </body>
 </html>

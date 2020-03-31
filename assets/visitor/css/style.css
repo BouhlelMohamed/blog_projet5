@@ -992,7 +992,6 @@ h2.menu-item:after {
     font-size: 26px;
     font-weight: 300;
     display: block;
-    text-transform: capitalize;
 }
 
 .social {

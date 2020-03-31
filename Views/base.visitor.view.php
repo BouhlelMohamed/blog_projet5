@@ -39,10 +39,11 @@ document.write(screen.width);
                 <div class="name-block-container">
                     <h1><span>Bonjour, Je m'appelle</span>Bouhlel Mohamed</h1>
                     <h2>Développeur PHP</h2>
+                    <h3><br>Curieux, dynamique et ambitieux<br> je suis un jeune développeur PHP/Symfony <br>en quête de nouveaux défis !</h3>
                     <a target="_blank" href="assets/cv.pdf" download="assets/cv.pdf" class="btn btn-download">Télécharger mon CV</a>
                     <ul class="social">
                         <li><a target="_blank" href="https://fr.linkedin.com/in/mohamed-bouhlelphp"><i class="icon ion-social-linkedin"></i></a></li>
-                        <li><a href="http://mohamed-bouhlel.com/" target="_blank"><i class="icon ion-android-contact"></i>	</a></li>
+                        <li><a href="http://mohamed-bouhlel.com/p5/admin" target="_blank"><i class="icon ion-android-contact"></i>	</a></li>
                     </ul>
                 </div>
             </div>
@@ -88,6 +89,7 @@ document.write(screen.width);
     <script src="assets/visitor/js/plugins.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmsb2nGLuIl04bt7CWJozRMhThvGa3y1w"></script>
     <script src="assets/visitor/js/main.js"></script>
+    <script src="assets/jQuery/j.script.js"></script>
     <script src="assets/visitor/blog_details/js/jquery.ajaxchimp.min.js"></script>
     <script src="assets/visitor/blog_details/vendors/jquery/jquery-3.2.1.min.js"></script>
 

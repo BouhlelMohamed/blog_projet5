@@ -1,7 +1,5 @@
 <?php
 
-require_once('AbstractEntity.php');
-
 class User extends AbstractEntity
 {
     private $id;
@@ -40,9 +38,9 @@ class User extends AbstractEntity
         return $this;
     }
 
-    public function getLastName(): string
+    public function getLastName()
     {
-        return Config::str_replaceUTF8($this->lastName);
+        return $this->lastName;
     }
 
     public function setFirstName(string $firstName): self
@@ -52,9 +50,9 @@ class User extends AbstractEntity
         return $this;
     }
 
-    public function getFirstName(): string
+    public function getFirstName()
     {
-        return Config::str_replaceUTF8($this->firstName);
+        return $this->firstName;
     }
 
     public function setEmail(string $email): self
@@ -64,7 +62,7 @@ class User extends AbstractEntity
         return $this;
     }
 
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -78,7 +76,7 @@ class User extends AbstractEntity
 
     public function getUsername()
     {
-        return Config::str_replaceUTF8($this->username);
+        return $this->username;
     }
 
     public function setMdp(string $mdp): self
@@ -88,7 +86,7 @@ class User extends AbstractEntity
         return $this;
     }
     
-    public function getMdp(): string
+    public function getMdp()
     {
         return $this->mdp;
     }

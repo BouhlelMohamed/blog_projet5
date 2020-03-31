@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <?php if(isset($_SESSION['username']) == NULL OR $_SESSION['role'] == 0){ header('location: login'); }    ?>
   <!-- Topbar Start -->
   <div class="navbar-custom">

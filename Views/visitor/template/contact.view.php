@@ -1,10 +1,11 @@
+
             <div class="content-blocks contact">
                 <section class="content">
                     <div class="block-content">
                         <h3 class="block-title">CONTACT</h3>
                         <div class="row">
                             <div class="col-md-6">
-                                <form class="contact-form" action="/" method="post">
+                                <form class="contact-form" action="?send=1" name="form-contact" method="post">
                                     <div class="form-control-wrap">
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="fname" placeholder="Nom & Prénom*" name="name">
@@ -16,7 +17,7 @@
                                             <textarea class="form-control" rows="10" name="message" placeholder="Votre message" required></textarea>
                                         </div>
                                         <div class="form-group mar-top-40">
-                                            <input type="submit" class="btn v7" value="Envoyer">
+                                            <input type="submit" class="btn v7 " value="Envoyer">
                                         </div>
                                     </div>
                                 </form>
@@ -60,3 +61,20 @@
                 <section class="content"></section>
             </div>
         </div>
+        <?php   
+                if(isset($_POST['mail']) && isset($_POST['message']) && isset($_POST['name'])){
+                    if(isset($_GET['send']) && $_GET['send'] == 1)
+                    {
+                        $des = $_POST['mail'];
+                        $to = "mohamed.bouhleel@gmail.com";
+                        $subject = "Contact - Blog - ".$_POST['name'];
+                        $txt = $_POST['message'];
+                        $headers = "From: $des" . "\r\n" .
+                        "CC: mohamed.bouhleel@gmail.com";
+                        mail($to,$subject,$txt,$headers);    
+                    }
+                }
+            
+         ?>
+
+   

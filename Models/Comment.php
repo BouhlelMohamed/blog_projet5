@@ -1,6 +1,5 @@
 <?php
 
-require_once('AbstractEntity.php');
 
 class Comment extends AbstractEntity
 {
@@ -33,7 +32,7 @@ class Comment extends AbstractEntity
 
     public function getContent(): string
     {
-        return Config::str_replaceUTF8($this->content);
+        return $this->content;
     }
     public function setContent(string $content): self
     {

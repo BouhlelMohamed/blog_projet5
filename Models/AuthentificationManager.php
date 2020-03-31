@@ -1,26 +1,25 @@
 <?php
 
-require_once('Database.php');
-
 class AuthentificationManager extends Database
 {
 
-    public function register()
+    public function register($user)
     {
-        $hash = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
-        $query = Database::getPdo()->prepare("
+        $mdpUser = $user->getMdp();
+        $mdp = isset($mdpUser) ? $user->getMdp() : NULL;    
+        $hash = password_hash($mdp, PASSWORD_DEFAULT);
+        $sQuery = Database::getPdo()->prepare("
         INSERT INTO Users 
         (lastName, firstName, username, email, mdp) 
         VALUES (:lastName, :firstName, :username, :email, :mdp)");
-        $query->execute([
+        $sQuery->execute([
 
-            'lastName'      => isset($_POST["lastName"]) ? $_POST["lastName"] : NULL,
-            'firstName'     => isset($_POST["firstName"]) ? $_POST["firstName"] : NULL,
-            'username'      => isset($_POST["username"]) ? $_POST["username"] : NULL,
-            'email'         => isset($_POST["email"]) ? $_POST["email"] : NULL,
+            'lastName'      => htmlentities($user->getLastName())  ? $user->getLastName() : NULL,
+            'firstName'     => htmlentities($user->getFirstName()) ? $user->getLastName() : NULL,
+            'username'      => htmlentities($user->getUsername())  ? $user->getUsername() : NULL,
+            'email'         => htmlentities($user->getEmail())     ? $user->getEmail()    : NULL,
             'mdp'           => isset($hash) ? $hash : NULL,
         ]);
-
     }
 
 
@@ -30,7 +29,6 @@ class AuthentificationManager extends Database
         SELECT mdp FROM Users 
         WHERE email = :email OR username = :email");
         $queryForMdp->execute([
-            //'email' =>  "admin@admin.com"
             'email' =>  $_POST['email'] ?? NULL
         ]);
         $motDePasse = $queryForMdp->fetch()["mdp"];
@@ -74,21 +72,15 @@ class AuthentificationManager extends Database
             ]);
             $role = $queryForRole->fetch()["role"];
             $_SESSION['role'] = $role;
-
        }
-
-
     }
 
     public function logout()
     {
-        session_start();
         session_destroy();
         unset($_SESSION['username']);
         header('location:login');
 
     }
-
-
     
 }
