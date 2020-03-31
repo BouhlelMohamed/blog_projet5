@@ -1,6 +1,5 @@
 <h1>Créez votre premier blog en PHP</h1>
 <h4>Parcours Développeur d'application - PHP / Symfony</h4>
-<br> 
 <h4 style="color:orange">Pré-requis :</h4>
 PHP 7, MySQL, Apache.
 <br>
