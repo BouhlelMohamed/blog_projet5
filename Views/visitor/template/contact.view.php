@@ -62,7 +62,7 @@
             </div>
         </div>
         <?php   
-                if(isset($_POST['mail']) && isset($_POST['message']) && isset($_POST['name'])){
+/*                 if(isset($_POST['mail']) && isset($_POST['message']) && isset($_POST['name'])){
                     if(isset($_GET['send']) && $_GET['send'] == 1)
                     {
                         $des = $_POST['mail'];
@@ -73,7 +73,7 @@
                         "CC: mohamed.bouhleel@gmail.com";
                         mail($to,$subject,$txt,$headers);    
                     }
-                }
+                } */
             
          ?>
 

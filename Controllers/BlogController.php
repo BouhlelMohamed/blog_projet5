@@ -9,6 +9,18 @@ class BlogController
         $postManager    = new PostManager;
         $view           = new View;
         $authors        = $postManager->getAuthorPost();
+        if(isset($_POST['mail']) && isset($_POST['message']) && isset($_POST['name'])){
+            if(isset($_GET['send']) && $_GET['send'] == 1)
+            {
+                $des = $_POST['mail'];
+                $to = "mohamed.bouhleel@gmail.com";
+                $subject = "Contact - Blog - ".$_POST['name'];
+                $txt = $_POST['message'];
+                $headers = "From: $des" . "\r\n" .
+                "CC: mohamed.bouhleel@gmail.com";
+                mail($to,$subject,$txt,$headers);    
+            }
+        }
         return $view->render("Views/visitor/blog/blog",
         array(
         "posts"         => $postManager->findAllPosts(),
