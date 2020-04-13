@@ -1,6 +1,14 @@
 <?php
 header( 'content-type: text/html; charset=utf-8' );
 session_start();
+/* require_once "Controllers/UserController.php";
+require_once "Controllers/PostController.php";
+require_once "Controllers/CommentController.php";
+//require_once "Controllers/Page404Controller.php";
+require_once "Controllers/AuthentificationController.php";
+require_once "Controllers/BlogController.php";
+require_once "Controllers/HomeController.php";
+require_once "Views/View.php"; */
 require __DIR__ . "/vendor/autoload.php";
 require_once "autoload.php";
 
@@ -57,6 +65,7 @@ require_once "autoload.php";
         }
     }
     
+    //$link = substr($_SERVER["REQUEST_URI"], 4);
     $link = substr($_SERVER["REQUEST_URI"], 4);
 
     showPage($link);
