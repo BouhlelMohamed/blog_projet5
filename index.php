@@ -57,7 +57,6 @@ require_once "autoload.php";
         }
     }
     
-    //$link = substr($_SERVER["REQUEST_URI"], 4);
     $link = substr($_SERVER["REQUEST_URI"], 4);
 
     showPage($link);
