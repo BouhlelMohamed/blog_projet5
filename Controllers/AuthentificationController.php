@@ -10,7 +10,7 @@ class AuthentificationController
         $authentificationManager->register($user);
         $_SESSION['successMessageAddUser'] = '<div class="alert alert-notif alert-info" style="background-color: rgb(29, 192, 255);">Votre compte a bien été créé</div>';
         $view = new View;
-        if(isset($_POST['email']) && isset($_POST['lastName']))
+        if(isset($_POST['lastName']) && isset($_POST['email']))
         {
             $des = "mohamed.bouhleel@gmail.com";
             $to = $_POST['email'];
