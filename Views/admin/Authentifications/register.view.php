@@ -53,7 +53,7 @@
                             </div> <!-- end card-body -->
                         </div>
                         <!-- end card -->
-                        <?php if(isset($_POST['input-submit'])) {header('Location: login');} ?>
+                        <?php //if(isset($_POST['input-submit'])) {header('Location: login');} ?>
 
                         <div class="row mt-3">
                             <div class="col-12 text-center">

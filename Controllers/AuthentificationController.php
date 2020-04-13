@@ -12,7 +12,7 @@ class AuthentificationController
         $view = new View;
         return $view->render("Views/admin/Authentifications/register",
         array(),"base.authentification");
-        
+        var_dump($_POST);die;        
     }
 
     public function loginPage()
