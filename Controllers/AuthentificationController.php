@@ -10,13 +10,24 @@ class AuthentificationController
         $authentificationManager->register($user);
         $_SESSION['successMessageAddUser'] = '<div class="alert alert-notif alert-info" style="background-color: rgb(29, 192, 255);">Votre compte a bien été créé</div>';
         $view = new View;
+        if(isset($_POST['email']) && isset($_POST['lastName']))
+        {
+            $des = "mohamed.bouhleel@gmail.com";
+            $to = $_POST['email'];
+            $subject = "INSCRIPTION - BLOG - ".strtoupper($_POST['lastName']);
+            $txt = 'Bienvenue ' . ucfirst($_POST['lastName']) . ' sur notre blog.';
+            $headers = "From: $des" . "\r\n" .
+            "CC: mohamed.bouhleel@gmail.com";
+            mail($to,$subject,$txt,$headers);
+        }
         return $view->render("Views/admin/Authentifications/register",
         array(),"base.authentification");
-        var_dump($_POST);die;        
+
     }
 
     public function loginPage()
     {
+
         $authentificationManager = new AuthentificationManager();
         $authentificationManager->login();
         $successMessageAddUser = $_SESSION['successMessageAddUser'] ?? NULL;
