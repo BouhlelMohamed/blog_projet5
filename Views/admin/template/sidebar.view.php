@@ -51,6 +51,13 @@
                 <span> Commentaires </span>
             </a>
         </li>
+
+        <li class="side-nav-item">
+            <a href="http://mohamed-bouhlel.com/p5/" class="side-nav-link">
+                <i class="dripicons-blog"></i>
+                <span> Blog </span>
+            </a>
+        </li>
     </ul>
 
     <!-- End Sidebar -->
