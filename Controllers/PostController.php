@@ -40,7 +40,7 @@ class PostController
     public function updatePostPage()
     {
         $id          = htmlspecialchars($_REQUEST['id']);
-        $post        = new Post(htmlspecialchars($_POST));
+        $post        = new Post($_POST);
         $postManager = new PostManager();
         $postManager->updatePost($post,$id);
         $_SESSION['successMessageUpdatePost'] = '<div class="alert alert-notif alert-info" style="background-color: #1dff63;color: black;">Votre article a bien été modifié</div>';
@@ -49,7 +49,7 @@ class PostController
 
     public function insertPostPage()
     {
-        $post        = new Post(htmlspecialchars($_POST));
+        $post        = new Post($_POST);
         $postManager = new PostManager();
         $postManager->insertPost($post);
         $_SESSION['successMessageAddPost'] = '<div class="alert alert-notif alert-info" style="background-color: rgb(29, 192, 255);">L\'article a bien été créé</div>';

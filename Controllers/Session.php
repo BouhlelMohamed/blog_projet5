@@ -2,7 +2,6 @@
 
 class Session
 {
-
     public function sessionStart()
     {
         if(session_status() === PHP_SESSION_NONE && session_status() === PHP_SESSION_DISABLED)
@@ -10,5 +9,4 @@ class Session
                 header('location: login');
         }
     }
-
 }

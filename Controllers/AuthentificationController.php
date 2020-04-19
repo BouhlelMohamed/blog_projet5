@@ -5,7 +5,7 @@ class AuthentificationController
 
     public function registerPage()
     {
-        $user        = new User(htmlspecialchars($_POST));
+        $user        = new User($_POST);
         $authentificationManager = new AuthentificationManager();
         $authentificationManager->register($user);
         $_SESSION['successMessageAddUser'] = '<div class="alert alert-notif alert-info" style="background-color: rgb(29, 192, 255);">Votre compte a bien été créé</div>';
@@ -27,7 +27,6 @@ class AuthentificationController
 
     public function loginPage()
     {
-
         $authentificationManager = new AuthentificationManager();
         $authentificationManager->login();
         $successMessageAddUser = $_SESSION['successMessageAddUser'] ?? NULL;

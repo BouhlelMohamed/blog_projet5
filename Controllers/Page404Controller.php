@@ -3,7 +3,6 @@
 
 class Page404Controller
 {
-
     public function page404NotFound()
     {
         $view = new View;

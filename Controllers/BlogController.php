@@ -52,8 +52,7 @@ class BlogController
             "authors"       => $authors
         ),
             "base.onePost"
-        );
-            
+        );  
     }
 
     public function insertCommentPage()
