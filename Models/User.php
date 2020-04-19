@@ -25,13 +25,13 @@ class User extends AbstractEntity
         return $this->id;
     }
 
-    public function setId(int $id): self
+    public function setId(int $id)
     {
         $this->id = $id;
 
         return $this;
     }
-    public function setLastName(string $lastName): self
+    public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
 
@@ -43,7 +43,7 @@ class User extends AbstractEntity
         return $this->lastName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
 
@@ -55,7 +55,7 @@ class User extends AbstractEntity
         return $this->firstName;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email)
     {
         $this->email = $email;
 
@@ -67,7 +67,7 @@ class User extends AbstractEntity
         return $this->email;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username)
     {
         $this->username = $username;
 
@@ -79,7 +79,7 @@ class User extends AbstractEntity
         return $this->username;
     }
 
-    public function setMdp(string $mdp): self
+    public function setMdp(string $mdp)
     {
         $this->mdp = $mdp;
 
@@ -91,7 +91,7 @@ class User extends AbstractEntity
         return $this->mdp;
     }
 
-    public function setRole(int $role): self
+    public function setRole(int $role)
     {
         $this->role = $role;
 
@@ -102,7 +102,7 @@ class User extends AbstractEntity
     {
         return $this->role;
     }
-    public function setState(int $state): self
+    public function setState(int $state)
     {
         $this->state = $state;
 
@@ -118,7 +118,7 @@ class User extends AbstractEntity
     {
         return $this->createdAt;
     }
-    public function setCreatedAt(string $createdAt): self
+    public function setCreatedAt(string $createdAt)
     {
         $this->createdAt = $createdAt;
  

@@ -22,7 +22,7 @@ class Post extends AbstractEntity
    {
        return $this->id;
    }
-   public function setId(int $id): self
+   public function setId(int $id)
    {
        $this->id = $id;
 
@@ -33,7 +33,7 @@ class Post extends AbstractEntity
    {
        return $this->title;
    }
-   public function setTitle(string $title): self
+   public function setTitle(string $title)
    {
        $this->title = $title;
 
@@ -44,7 +44,7 @@ class Post extends AbstractEntity
    {
        return $this->chapo;
    }
-   public function setChapo(string $chapo): self
+   public function setChapo(string $chapo)
    {
        $this->chapo = $chapo;
 
@@ -55,7 +55,7 @@ class Post extends AbstractEntity
    {
        return $this->content;
    }
-   public function setContent(string $content): self
+   public function setContent(string $content)
    {
        $this->content = $content;
 
@@ -66,7 +66,7 @@ class Post extends AbstractEntity
    {
        return $this->createdAt;
    }
-   public function setCreatedAt(string $createdAt): self
+   public function setCreatedAt(string $createdAt)
    {
        $this->createdAt = $createdAt;
 
@@ -77,7 +77,7 @@ class Post extends AbstractEntity
    {
        return $this->updateAt;
    }
-   public function setUpdateAt(string $updateAt): self
+   public function setUpdateAt(string $updateAt)
    {
        $this->updateAt = $updateAt;
 
@@ -88,7 +88,7 @@ class Post extends AbstractEntity
    {
        return $this->idAuthor;
    }
-   public function setIdAuthor(?string $idAuthor): self
+   public function setIdAuthor(?string $idAuthor)
    {
        $this->idAuthor = $idAuthor;
 

@@ -34,7 +34,7 @@ class Comment extends AbstractEntity
     {
         return $this->content;
     }
-    public function setContent(string $content): self
+    public function setContent(string $content)
     {
         $this->content = $content;
 
@@ -45,7 +45,7 @@ class Comment extends AbstractEntity
     {
         return $this->state;
     }
-    public function setState(int $state): self
+    public function setState(int $state)
     {
         $this->state = $state;
 
@@ -56,7 +56,7 @@ class Comment extends AbstractEntity
     {
         return $this->idAuthor;
     }
-    public function setIdAuthor(int $idAuthor): self
+    public function setIdAuthor(int $idAuthor)
     {
         $this->idAuthor = $idAuthor;
 
@@ -67,7 +67,7 @@ class Comment extends AbstractEntity
     {
         return $this->idPost;
     }
-    public function setIdPost(int $idPost): self
+    public function setIdPost(int $idPost)
     {
         $this->idPost = $idPost;
 
@@ -78,7 +78,7 @@ class Comment extends AbstractEntity
     {
         return $this->author;
     }
-    public function setAuthor(?string $author): self
+    public function setAuthor(?string $author)
     {
         $this->author = $author;
 
