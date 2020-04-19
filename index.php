@@ -6,8 +6,9 @@ require __DIR__ . "/vendor/autoload.php";
 require_once "autoload.php";
 
 /** DONNEES DE CONFIGURATION DU SITE                    **/
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
+    define(DISPLAY_ERRORS ,1);
+	ini_set('display_errors', DISPLAY_ERRORS);
+	ini_set('display_startup_errors', DISPLAY_ERRORS);
 	error_reporting(E_ALL);
 
     function showPage(string $link)
