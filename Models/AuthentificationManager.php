@@ -29,10 +29,10 @@ class AuthentificationManager extends Database
         SELECT mdp FROM Users 
         WHERE email = :email OR username = :email");
         $queryForMdp->execute([
-            'email' =>  $_POST['email'] ?? NULL
+            'email' =>  htmlspecialchars($_POST['email']) ?? NULL
         ]);
         $motDePasse = $queryForMdp->fetch()["mdp"];
-        $mdp = password_verify($_POST['mdp'] ?? NULL, $motDePasse); 
+        $mdp = password_verify(htmlspecialchars($_POST['mdp']) ?? NULL, $motDePasse); 
         //var_dump($mdp);
         if(isset($mdp) && $mdp == true)
         {
@@ -41,7 +41,7 @@ class AuthentificationManager extends Database
             WHERE email = :email, mdp = :mdp");
             //var_dump('im here');
             $query->execute([
-                'email' =>  $_POST['email'] ?? NULL,
+                'email' =>  htmlspecialchars($_POST['email']) ?? NULL,
                 'mdp'   =>  $mdp
             ]);
             header('Location: admin');
@@ -50,7 +50,7 @@ class AuthentificationManager extends Database
             SELECT username FROM Users 
             WHERE email = :email");
             $queryForSession->execute([
-                'email' =>  $_POST['email'] ?? NULL
+                'email' =>  htmlspecialchars($_POST['email']) ?? NULL
             ]);
             $username = $queryForSession->fetch()["username"];
             $_SESSION['username'] = $username;
@@ -59,7 +59,7 @@ class AuthentificationManager extends Database
             SELECT id FROM Users 
             WHERE email = :email");
             $queryForId->execute([
-                'email' =>  $_POST['email'] ?? NULL
+                'email' =>  htmlspecialchars($_POST['email']) ?? NULL
             ]);
             $id = $queryForId->fetch()["id"];
             $_SESSION['id'] = $id;
@@ -68,7 +68,7 @@ class AuthentificationManager extends Database
             SELECT role FROM Users 
             WHERE email = :email");
             $queryForRole->execute([
-                'email' =>  $_POST['email'] ?? NULL
+                'email' =>  htmlspecialchars($_POST['email']) ?? NULL
             ]);
             $role = $queryForRole->fetch()["role"];
             $_SESSION['role'] = $role;

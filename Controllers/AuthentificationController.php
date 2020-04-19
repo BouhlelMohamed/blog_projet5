@@ -5,7 +5,7 @@ class AuthentificationController
 
     public function registerPage()
     {
-        $user        = new User($_POST);
+        $user        = new User(htmlspecialchars($_POST));
         $authentificationManager = new AuthentificationManager();
         $authentificationManager->register($user);
         $_SESSION['successMessageAddUser'] = '<div class="alert alert-notif alert-info" style="background-color: rgb(29, 192, 255);">Votre compte a bien été créé</div>';
@@ -13,9 +13,9 @@ class AuthentificationController
         if(isset($_POST['lastName']) && isset($_POST['email']))
         {
             $des = "mohamed.bouhleel@gmail.com";
-            $to = $_POST['email'];
-            $subject = "INSCRIPTION - BLOG - ".strtoupper($_POST['lastName']);
-            $txt = 'Bienvenue ' . ucfirst($_POST['lastName']) . ' sur notre blog.';
+            $to = htmlspecialchars($_POST['email']);
+            $subject = "INSCRIPTION - BLOG - ".strtoupper(htmlspecialchars($_POST['lastName']));
+            $txt = 'Bienvenue ' . ucfirst(htmlspecialchars($_POST['lastName'])) . ' sur notre blog.';
             $headers = "From: $des" . "\r\n" .
             "CC: mohamed.bouhleel@gmail.com";
             mail($to,$subject,$txt,$headers);

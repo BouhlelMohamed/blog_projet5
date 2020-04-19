@@ -27,7 +27,7 @@ class CommentController
 
     public function validateCommentPage()
     {
-        $id = $_REQUEST['id'];
+        $id = htmlspecialchars($_REQUEST['id']);
         $comment        = new Comment();
         $commentManager = new CommentManager();
         $commentManager->validateComment($id,$comment);
@@ -40,7 +40,7 @@ class CommentController
 
     public function deleteCommentPage()
     {
-        $id = $_REQUEST['id'];
+        $id = htmlspecialchars($_REQUEST['id']);
         $commentManager = new CommentManager();
         $commentManager->deleteComment($id);
         $_SESSION['successMessageForDeleteComment'] = '<div class="alert alert-notif alert-info" style="background-color:#ff0000b3;">Le commentaire a bien été supprimé</div>';

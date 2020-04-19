@@ -25,8 +25,8 @@ class UserController
     public function oneUserPage()
     {
         $userManager = new UserManager();
-        $id          = $_REQUEST['id'];
-        $view = new View;
+        $id          = htmlspecialchars($_REQUEST['id']);
+        $view        = new View;
         return $view->render("Views/admin/Users/showOneUser", 
         array(
             "user" => $userManager->findOneUserById($id)
@@ -35,8 +35,8 @@ class UserController
 
     public function updateUserPage()
     {
-        $id          = $_REQUEST['id'];
-        $user        = new User($_POST);
+        $id          = htmlspecialchars($_REQUEST['id']);
+        $user        = new User(htmlspecialchars($_POST));
         $userManager = new UserManager();
         $userManager->updateUserWithId($user,$id);
         header("Location: user?id=$id");
@@ -45,7 +45,7 @@ class UserController
     public function validateUserPage()
     {
         $userManager = new UserManager();    
-        $id          = $_REQUEST['id'];
+        $id          = htmlspecialchars($_REQUEST['id']);
         $userManager->validateUser($id);
         $_SESSION['successMessageValidateUser'] = '<div class="alert alert-notif alert-info" style="background-color: #1dff63;color: black;">L\'utilisateur a bien été validé</div>';
         header("Location: users");
@@ -54,7 +54,7 @@ class UserController
     public function userForAdminPage()
     {
         $userManager = new UserManager();
-        $id          = $_REQUEST['id'];
+        $id          = htmlspecialchars($_REQUEST['id']);
         $userManager->userForAdmin($id);
         $_SESSION['successMessage'] = '<div class="alert alert-notif alert-info">Le rôle d\'utilisateur a bien été changé</div>';
         header("Location: users");
@@ -63,7 +63,7 @@ class UserController
     public function adminForUserPage()
     {
         $userManager = new UserManager();
-        $id          = $_REQUEST['id'];
+        $id          = htmlspecialchars($_REQUEST['id']);
         $userManager->adminForUser($id);
         $_SESSION['successMessage'] = '<div class="alert alert-notif alert-info">Le rôle d\'utilisateur a bien été changé</div>';
         header("Location: users");
@@ -72,7 +72,7 @@ class UserController
     public function deleteUserPage()
     {
         $userManager = new UserManager();
-        $id          = $_REQUEST['id'];
+        $id          = htmlspecialchars($_REQUEST['id']);
         $userManager->deleteUserWithId($id);
         $_SESSION['successMessageForDeleteUser'] = '<div class="alert alert-notif alert-info" style="background-color:#ff0000b3;">L\'utilisateur a bien été supprimé</div>';
         header("Location: users");

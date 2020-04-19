@@ -12,10 +12,10 @@ class BlogController
         if(isset($_POST['mail']) && isset($_POST['message']) && isset($_POST['name'])){
             if(isset($_GET['send']) && $_GET['send'] == 1)
             {
-                $des = $_POST['mail'];
+                $des = htmlspecialchars($_POST['mail']);
                 $to = "mohamed.bouhleel@gmail.com";
-                $subject = "Contact - Blog - ".$_POST['name'];
-                $txt = $_POST['message'];
+                $subject = "Contact - Blog - ".htmlspecialchars($_POST['name']);
+                $txt = htmlspecialchars($_POST['message']);
                 $headers = "From: $des" . "\r\n" .
                 "CC: mohamed.bouhleel@gmail.com";
                 mail($to,$subject,$txt,$headers);    
@@ -32,7 +32,7 @@ class BlogController
 
     public function onePostPage()
     {
-        $id = $_REQUEST['id'];
+        $id = htmlspecialchars($_REQUEST['id']);
         $postManager    = new PostManager;
         $commentManager = new CommentManager();
         $view           = new View;
@@ -59,8 +59,8 @@ class BlogController
     public function insertCommentPage()
     {
         $commentManager = new CommentManager();
-        $comment        = new Comment($_POST);
-        $id = $_REQUEST['id'];
+        $comment        = new Comment(htmlspecialchars($_POST));
+        $id = htmlspecialchars($_REQUEST['id']);
         $commentManager->insertComment($comment,$id);
         $url = $_SERVER['HTTP_REFERER'];
         header("Location: $url");
