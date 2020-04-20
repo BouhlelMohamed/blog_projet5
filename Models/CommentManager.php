@@ -40,6 +40,8 @@ class CommentManager extends Database
 
     public function findCommentWithId(int $id)
     {
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['token'] = $token;
         if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
         {
             if(isset($id) && !empty($id) && is_int($id))

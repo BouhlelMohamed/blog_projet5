@@ -30,6 +30,7 @@
                                                     <label>Texte :</label>
                                                     <textarea class="form-control" name="content" rows="12"><?= $post->getContent(); ?></textarea>
                                                 </div>
+                                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>"></input>
                                                 <button class="btn btn-success btn-sm mt-2"><i class="mdi mdi-content-save-outline mr-1"></i>Sauvegarder</button>
                                                 </form>
                                             </div>

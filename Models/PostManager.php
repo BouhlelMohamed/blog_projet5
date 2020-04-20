@@ -24,6 +24,8 @@ class PostManager extends Database
 
     public function findPostById($id)
     {
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['token'] = $token;
         if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
         {
             $query = Database::getPdo()->prepare("SELECT * FROM Posts WHERE id = :id");
@@ -42,16 +44,32 @@ class PostManager extends Database
 
     public function updatePost($post,$id)
     {
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
+        // D'ou l'utilisateur arrive
+        if(substr($_SERVER['HTTP_REFERER'],0,34) == 'http://mohamed-bouhlel.com/p5/post')
         {
-            $query = Database::getPdo()->prepare("UPDATE Posts SET title = :title, chapo = :chapo, content = :content, update_at = NOW() WHERE id = :id");
-            $query->execute([
-                'title'   =>  htmlentities($post->getTitle()),
-                "chapo"   =>  htmlentities($post->getChapo()), 
-                "content" =>  htmlentities($post->getContent()),
-                "id"      =>  $id
-            ]);
+            //On vérifie que tous les jetons sont là
+            if (isset($_SESSION['token']) AND isset($_POST['token']) AND 
+            !empty($_SESSION['token']) AND !empty($_POST['token'])) {
+                // On vérifie que les deux correspondent
+                if ($_SESSION['token'] == $_POST['token']) {
+                    if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
+                    {
+                        $query = Database::getPdo()->prepare("UPDATE Posts SET title = :title, chapo = :chapo, content = :content, update_at = NOW() WHERE id = :id");
+                        $query->execute([
+                            'title'   =>  htmlentities($post->getTitle()),
+                            "chapo"   =>  htmlentities($post->getChapo()), 
+                            "content" =>  htmlentities($post->getContent()),
+                            "id"      =>  $id
+                        ]);
+                    }
+                }
+            }
         }
+        else {
+            // Les token ne correspondent pas
+            echo("<script>location.href = '/p5/';</script>");
+        }
+
     }
 
     public function insertPost($post)
@@ -105,5 +123,6 @@ class PostManager extends Database
             $query = Database::getPdo()->prepare("DELETE FROM Posts WHERE id = :id LIMIT 1");
             $query->execute(['id' => $id]);
         }
+
     }
 }
