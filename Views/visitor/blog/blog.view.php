@@ -1,4 +1,3 @@
-
 <div class="content-blocks portfolio">
                 <section class="content">
                     <div class="block-content">

@@ -5,21 +5,28 @@ class AuthentificationManager extends Database
 
     public function register($user)
     {
-        $mdpUser = $user->getMdp();
-        $mdp = isset($mdpUser) ? $user->getMdp() : NULL;    
-        $hash = password_hash($mdp, PASSWORD_DEFAULT);
-        $sQuery = Database::getPdo()->prepare("
-        INSERT INTO Users 
-        (lastName, firstName, username, email, mdp) 
-        VALUES (:lastName, :firstName, :username, :email, :mdp)");
-        $sQuery->execute([
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['token'] = $token;
+        if(isset($_SESSION['token']) AND isset($_POST['token']) AND 
+        !empty($_SESSION['token']) AND !empty($_POST['token'])) {
+            if($_SESSION['token'] == $_POST['token']) {
+                $mdpUser = $user->getMdp();
+                $mdp = isset($mdpUser) ? $user->getMdp() : NULL;    
+                $hash = password_hash($mdp, PASSWORD_DEFAULT);
+                $sQuery = Database::getPdo()->prepare("
+                INSERT INTO Users 
+                (lastName, firstName, username, email, mdp) 
+                VALUES (:lastName, :firstName, :username, :email, :mdp)");
+                $sQuery->execute([
 
-            'lastName'      => htmlentities($user->getLastName())  ? $user->getLastName() : NULL,
-            'firstName'     => htmlentities($user->getFirstName()) ? $user->getLastName() : NULL,
-            'username'      => htmlentities($user->getUsername())  ? $user->getUsername() : NULL,
-            'email'         => htmlentities($user->getEmail())     ? $user->getEmail()    : NULL,
-            'mdp'           => isset($hash) ? $hash : NULL,
-        ]);
+                    'lastName'      => htmlentities($user->getLastName())  ? htmlspecialchars($user->getLastName()) : NULL,
+                    'firstName'     => htmlentities($user->getFirstName()) ? htmlspecialchars($user->getLastName()) : NULL,
+                    'username'      => htmlentities($user->getUsername())  ? htmlspecialchars($user->getUsername()) : NULL,
+                    'email'         => htmlentities($user->getEmail())     ? htmlspecialchars($user->getEmail())    : NULL,
+                    'mdp'           => isset($hash) ? $hash : NULL,
+                ]);
+            }
+        }
     }
 
 

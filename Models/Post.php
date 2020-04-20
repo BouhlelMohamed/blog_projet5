@@ -62,22 +62,22 @@ class Post extends AbstractEntity
        return $this;
    }
 
-   public function getCreatedAt(): string
+   public function getCreatedAt()
    {
        return $this->createdAt;
    }
-   public function setCreatedAt(string $createdAt)
+   public function setCreatedAt($createdAt)
    {
        $this->createdAt = $createdAt;
 
        return $this;
    }
 
-   public function getUpdateAt(): string
+   public function getUpdateAt()
    {
        return $this->updateAt;
    }
-   public function setUpdateAt(string $updateAt)
+   public function setUpdateAt($updateAt)
    {
        $this->updateAt = $updateAt;
 

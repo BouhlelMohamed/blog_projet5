@@ -21,7 +21,13 @@
                     <p class="mb-0"><?php echo nl2br($post->getContent()); ?></p>
                   </blockquote>
                     <div class="news_d_footer flex-column flex-sm-row">
-                      <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span><?php if(!empty(count($comments)) > 9){ echo count($comments); }else{ echo "0" . count($comments); } ?> Commentaires</a>
+                      <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#">
+                        <span class="align-middle mr-2">
+                          <i class="ti-themify-favicon"></i>
+                        </span>
+                      <?php if(!empty(count($comments)) > 9){ echo count($comments); }else{ echo "0" . count($comments); } ?> 
+                      Commentaires
+                      </a>
                     </div>
 
                     
@@ -54,6 +60,7 @@
                               <div class="form-group">
                                   <textarea class="form-control mb-10" rows="5" name="content" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                               </div>
+                              <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>"></input>
                               <button class="button submit_btn">Envoyer</button>	
                           </form>
                       </div>

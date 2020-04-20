@@ -36,7 +36,7 @@ class UserController
     public function updateUserPage()
     {
         $id          = htmlspecialchars($_REQUEST['id']);
-        $user        = new User(htmlspecialchars($_POST));
+        $user        = new User($_POST);
         $userManager = new UserManager();
         $userManager->updateUserWithId($user,$id);
         header("Location: user?id=$id");

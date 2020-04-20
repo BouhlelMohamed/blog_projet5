@@ -58,7 +58,7 @@ class BlogController
     public function insertCommentPage()
     {
         $commentManager = new CommentManager();
-        $comment        = new Comment(htmlspecialchars($_POST));
+        $comment        = new Comment($_POST);
         $id = htmlspecialchars($_REQUEST['id']);
         $commentManager->insertComment($comment,$id);
         $url = $_SERVER['HTTP_REFERER'];

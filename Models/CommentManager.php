@@ -5,8 +5,6 @@ class CommentManager extends Database
 {
     public function findAllComments()
     {
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
-        {
             $comment = new Comment;
             $query = Database::getPdo()->prepare("SELECT * FROM Comments ORDER BY created_at DESC");
             $query->execute();
@@ -21,20 +19,16 @@ class CommentManager extends Database
                 $index++;
             }
             return $comments;
-        }
     }
 
     public function getAuthorFunction()
     {
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
-        {
             $query = Database::getPdo()->prepare(
             "SELECT c.id_user,u.username FROM Users u INNER JOIN Comments c ON u.id = c.id_user");
             $query->execute();
             $authors = array();
             $authors = $query->fetchAll(PDO::FETCH_UNIQUE);
             return $authors;
-        }
     }
 
 
@@ -42,8 +36,6 @@ class CommentManager extends Database
     {
         $token = bin2hex(random_bytes(32));
         $_SESSION['token'] = $token;
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
-        {
             if(isset($id) && !empty($id) && is_int($id))
             {
                 $query = Database::getPdo()->prepare("SELECT * FROM Comments WHERE id_post = :id AND state = 1");
@@ -60,21 +52,29 @@ class CommentManager extends Database
                     }
                     return $comments;
             }
-        }
     }
 
 
     public function insertComment($comment,$id)
     {
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
+        if(substr($_SERVER['HTTP_REFERER'],0,34) == 'http://mohamed-bouhlel.com/p5/blog')
         {
-            $query = Database::getPdo()->prepare("INSERT INTO Comments (id_post,content,id_user) VALUES(:id_post,:content,:id_user)");
-            $query->execute(array(
-                'id_post'     => (int)$id,
-                'content'     => htmlentities($comment->getContent()),
-                'id_user'     => htmlentities($comment->getIdAuthor())
-            ));
+            if (isset($_SESSION['token']) AND isset($_POST['token']) AND 
+            !empty($_SESSION['token']) AND !empty($_POST['token'])) {
+                if ($_SESSION['token'] == $_POST['token']) {
+                    if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
+                        {
+                            $query = Database::getPdo()->prepare("INSERT INTO Comments (id_post,content,id_user) VALUES(:id_post,:content,:id_user)");
+                            $query->execute(array(
+                                'id_post'     => (int)$id,
+                                'content'     => htmlentities(htmlspecialchars($comment->getContent())),
+                                'id_user'     => htmlentities(htmlspecialchars($comment->getIdAuthor()))
+                            ));
+                        }
+                    }
+            }
         }
+
     }
 
     public function validateComment(int $id)

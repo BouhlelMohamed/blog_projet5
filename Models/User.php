@@ -114,11 +114,11 @@ class User extends AbstractEntity
         return $this->state;
     }
 
-    public function getCreatedAt(): string
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
-    public function setCreatedAt(string $createdAt)
+    public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
  

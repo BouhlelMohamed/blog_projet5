@@ -5,8 +5,8 @@ class PostManager extends Database
 
     public function findAllPosts()
     {
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
-        {
+            $token = bin2hex(random_bytes(32));
+            $_SESSION['token'] = $token;
             $query = Database::getPdo()->prepare("SELECT * FROM Posts  ORDER BY created_at DESC");
             $query->execute();
             $posts = array();
@@ -18,27 +18,22 @@ class PostManager extends Database
                 $posts[$index] = $post;
                 $index++;
             }
-            return $posts;
-        }
+        return $posts;
     }
 
     public function findPostById($id)
     {
         $token = bin2hex(random_bytes(32));
         $_SESSION['token'] = $token;
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
+        $query = Database::getPdo()->prepare("SELECT * FROM Posts WHERE id = :id");
+        $query->execute(["id" => $id]);
+        $postById = $query->fetch();
+        if(!$postById)
         {
-            $query = Database::getPdo()->prepare("SELECT * FROM Posts WHERE id = :id");
-            $query->execute(["id" => $id]);
-            $postById = $query->fetch();
-            if(!$postById)
-            {
-                echo("<script>location.href = '/p5/posts';</script>");
-            }elseif($postById != false)
-            {
-                return new Post($postById);
-            }
-            return null;
+            echo("<script>location.href = '/p5/page404';</script>");
+        }elseif($postById != false)
+        {
+            return new Post($postById);
         }
     }
 
@@ -56,9 +51,9 @@ class PostManager extends Database
                     {
                         $query = Database::getPdo()->prepare("UPDATE Posts SET title = :title, chapo = :chapo, content = :content, update_at = NOW() WHERE id = :id");
                         $query->execute([
-                            'title'   =>  htmlentities($post->getTitle()),
-                            "chapo"   =>  htmlentities($post->getChapo()), 
-                            "content" =>  htmlentities($post->getContent()),
+                            'title'   =>  htmlentities(htmlspecialchars($post->getTitle())),
+                            "chapo"   =>  htmlentities(htmlspecialchars($post->getChapo())), 
+                            "content" =>  htmlentities(htmlspecialchars($post->getContent())),
                             "id"      =>  $id
                         ]);
                     }
@@ -74,23 +69,30 @@ class PostManager extends Database
 
     public function insertPost($post)
     {
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
+        if($_SERVER['HTTP_REFERER'] == 'http://mohamed-bouhlel.com/p5/posts')
         {
-            $query = Database::getPdo()->prepare("INSERT INTO Posts (id_author,title,chapo, content) VALUES(:id_author,:title,:chapo,:content)");
-            $query->execute(array(
-                'id_author' => $post->getIdAuthor(),
-                'title'     => htmlentities($post->getTitle()),
-                'chapo'     => htmlentities($post->getChapo()),          
-                'content'   => htmlentities($post->getContent())          
-            ));
+            //On vérifie que tous les jetons sont là
+            if (isset($_SESSION['token']) AND isset($_POST['token']) AND 
+                !empty($_SESSION['token']) AND !empty($_POST['token'])) {
+                if ($_SESSION['token'] == $_POST['token']) {
+                    if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
+                    {
+                        $query = Database::getPdo()->prepare("INSERT INTO Posts (id_author,title,chapo, content) VALUES(:id_author,:title,:chapo,:content)");
+                        $query->execute(array(
+                            'id_author' => $post->getIdAuthor(),
+                            'title'     => htmlentities(htmlspecialchars($post->getTitle())),
+                            'chapo'     => htmlentities(htmlspecialchars($post->getChapo())),          
+                            'content'   => htmlentities(htmlspecialchars($post->getContent()))          
+                        ));
+                    }
+                }
+            }
         }
     }
 
 
     public function getAuthorPost($iPostId='')
     {
-        if(!empty($_SESSION['username']) && !empty($_SESSION['id']))
-        {
             if(isset($iPostId) && strlen($iPostId) > 0 && !empty($iPostId))
             {
                 $sQuery = Database::getPdo()->prepare("SELECT p.id id_post,u.id id_user,u.username 
@@ -113,7 +115,6 @@ class PostManager extends Database
             {
                 return $aData;
             }
-        }
     }
 
     public function deletePost(int $id)

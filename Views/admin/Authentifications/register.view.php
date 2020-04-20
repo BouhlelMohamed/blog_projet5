@@ -48,7 +48,7 @@
                                     <div class="form-group mb-0 text-center">
                                         <input class="btn btn-primary" value="S'inscrire" name="input-submit" type="submit">
                                     </div>
-
+                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>"></input>
                                 </form>
                             </div> <!-- end card-body -->
                         </div>

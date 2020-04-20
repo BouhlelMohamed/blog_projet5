@@ -99,6 +99,7 @@
                                                 <label>Texte :</label>
                                                 <textarea class="form-control" rows="10" name="content"></textarea>
                                             </div>
+                                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>"></input>
                                             <div class="form-group text-center">
                                                 <button class="btn btn-primary" type="submit" >Ajouter</button>
                                             </div>
