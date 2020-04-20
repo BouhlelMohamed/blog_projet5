@@ -49,10 +49,10 @@ class UserManager extends Database
             $query = Database::getPdo()->prepare("UPDATE Users SET firstName = :firstName ,lastName = :lastName, email = :email, username = :username  WHERE id= :id LIMIT 1");
             $query->execute(
                 [
-                    'firstName'     => htmlentities(htmlspecialchars($user->getFirstName())),
-                    'lastName'      => htmlentities(htmlspecialchars($user->getLastName())),
-                    'email'         => htmlentities(htmlspecialchars($user->getEmail())),
-                    'username'      => htmlentities(htmlspecialchars($user->getUsername())),
+                    'firstName'     => htmlspecialchars($user->getFirstName()),
+                    'lastName'      => htmlspecialchars($user->getLastName()),
+                    'email'         => htmlspecialchars($user->getEmail()),
+                    'username'      => htmlspecialchars($user->getUsername()),
                     'id'            => $id
                 ]);   
         } 

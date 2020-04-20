@@ -14,6 +14,7 @@
                                 
                                 <div class="text-center w-75 m-auto">
                                     <h4 class="text-dark-50 text-center mt-0 font-weight-bold">Inscription</h4>
+                                    <h6 class="text-dark-50 text-center mt-0 font-weight-bold">Le captcha est obligatoire pour la création de votre compte dans le cas contraire votre compte ne sera pas créé</h6>
                                 </div>
                                 <hr>
                                 <form action="register" method="POST">
@@ -44,17 +45,26 @@
                                         <label for="password">Mot de passe</label>
                                         <input class="form-control" type="password" name="mdp" required>
                                     </div>
-
-                                    <div class="form-group mb-0 text-center">
+                                    <div class="g-recaptcha" data-sitekey="6Lec_OsUAAAAAAq4CirUh9kkcgMIzBKowipAotRX"></div>
+                                        <div name="captcha" class="form-group mb-0 mt-1 text-center">
                                         <input class="btn btn-primary" value="S'inscrire" name="input-submit" type="submit">
                                     </div>
-                                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>"></input>
                                 </form>
                             </div> <!-- end card-body -->
                         </div>
                         <!-- end card -->
-                        <?php if(isset($_POST['input-submit'])) {header('Location: login');} ?>
-
+                        <?php 
+                            if(isset($_POST['input-submit']))
+                            {
+                                if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response']))
+                                {
+                                    header('Location: login');
+                                }else {
+                                    echo "<div style='color:red;font-size:15px;font-weight:bold;text-align:center'>Le captcha est obligatoire !!!</div>";
+                                }   
+                            } 
+ 
+                        ?>
                         <div class="row mt-3">
                             <div class="col-12 text-center">
                                 <p class="text-muted">Vous avez un compte ? <a href="login" class="text-muted ml-1"><b>Connectez-vous</b></a></p>
@@ -63,3 +73,6 @@
                         <!-- end row -->
 
                     </div> <!-- end col -->
+
+
+                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>

@@ -1,4 +1,4 @@
-<?php if(isset($_SESSION['username']) == NULL OR $_SESSION['role'] == 0){ header('location: login'); }    ?>
+<?php if(empty($_SESSION['username']) OR (empty($_SESSION['role']) && $_SESSION['role'] == 0)){ header('location: login'); }    ?>
   <!-- Topbar Start -->
   <div class="navbar-custom">
                         <ul class="list-unstyled topbar-right-menu float-right mb-0">

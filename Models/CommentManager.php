@@ -57,8 +57,8 @@ class CommentManager extends Database
 
     public function insertComment($comment,$id)
     {
-        if(substr($_SERVER['HTTP_REFERER'],0,34) == 'http://mohamed-bouhlel.com/p5/blog')
-        {
+        //if(substr($_SERVER['HTTP_REFERER'],0,34) == 'http://mohamed-bouhlel.com/p5/blog')
+        //{
             if (isset($_SESSION['token']) AND isset($_POST['token']) AND 
             !empty($_SESSION['token']) AND !empty($_POST['token'])) {
                 if ($_SESSION['token'] == $_POST['token']) {
@@ -67,13 +67,13 @@ class CommentManager extends Database
                             $query = Database::getPdo()->prepare("INSERT INTO Comments (id_post,content,id_user) VALUES(:id_post,:content,:id_user)");
                             $query->execute(array(
                                 'id_post'     => (int)$id,
-                                'content'     => htmlentities(htmlspecialchars($comment->getContent())),
-                                'id_user'     => htmlentities(htmlspecialchars($comment->getIdAuthor()))
+                                'content'     => htmlspecialchars($comment->getContent()),
+                                'id_user'     => htmlspecialchars($comment->getIdAuthor())
                             ));
                         }
                     }
             }
-        }
+        //}
 
     }
 

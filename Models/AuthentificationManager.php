@@ -5,11 +5,14 @@ class AuthentificationManager extends Database
 
     public function register($user)
     {
-        $token = bin2hex(random_bytes(32));
-        $_SESSION['token'] = $token;
-        if(isset($_SESSION['token']) AND isset($_POST['token']) AND 
-        !empty($_SESSION['token']) AND !empty($_POST['token'])) {
-            if($_SESSION['token'] == $_POST['token']) {
+        if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response']))
+        {
+            //your site secret key
+            $secret = '6Lec_OsUAAAAALEpWD7yO-uLDhp_AZCAXh64jzKe';
+            //get verify response data
+            $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+            $responseData = json_decode($verifyResponse);
+            if($responseData->success){
                 $mdpUser = $user->getMdp();
                 $mdp = isset($mdpUser) ? $user->getMdp() : NULL;    
                 $hash = password_hash($mdp, PASSWORD_DEFAULT);
@@ -19,11 +22,11 @@ class AuthentificationManager extends Database
                 VALUES (:lastName, :firstName, :username, :email, :mdp)");
                 $sQuery->execute([
 
-                    'lastName'      => htmlentities($user->getLastName())  ? htmlspecialchars($user->getLastName()) : NULL,
-                    'firstName'     => htmlentities($user->getFirstName()) ? htmlspecialchars($user->getLastName()) : NULL,
-                    'username'      => htmlentities($user->getUsername())  ? htmlspecialchars($user->getUsername()) : NULL,
-                    'email'         => htmlentities($user->getEmail())     ? htmlspecialchars($user->getEmail())    : NULL,
-                    'mdp'           => isset($hash) ? $hash : NULL,
+                    'lastName'      => ($user->getLastName())  ? htmlspecialchars($user->getLastName()) : NULL,
+                    'firstName'     => ($user->getFirstName()) ? htmlspecialchars($user->getLastName()) : NULL,
+                    'username'      => ($user->getUsername())  ? htmlspecialchars($user->getUsername()) : NULL,
+                    'email'         => ($user->getEmail())     ? htmlspecialchars($user->getEmail())    : NULL,
+                    'mdp'           => ($hash) ? $hash : NULL,
                 ]);
             }
         }
@@ -32,54 +35,34 @@ class AuthentificationManager extends Database
 
     public function login()
     {
-        $queryForMdp = Database::getPdo()->prepare("
-        SELECT mdp FROM Users 
-        WHERE email = :email OR username = :email");
-        $queryForMdp->execute([
-            'email' =>  $_POST['email'] ?? NULL
-        ]);
-        $motDePasse = $queryForMdp->fetch()["mdp"];
-        $mdp = password_verify($_POST['mdp'] ?? NULL, $motDePasse); 
-        //var_dump($mdp);
-        if(isset($mdp) && $mdp == true)
+        if(!empty($_POST))
         {
-            $query = Database::getPdo()->prepare("
+            $queryForMdp = Database::getPdo()->prepare("
             SELECT * FROM Users 
-            WHERE email = :email, mdp = :mdp");
-            //var_dump('im here');
-            $query->execute([
-                'email' =>  $_POST['email'] ?? NULL,
-                'mdp'   =>  $mdp
-            ]);
-            header('Location: admin');
-            session_start();
-            $queryForSession = Database::getPdo()->prepare("
-            SELECT username FROM Users 
-            WHERE email = :email");
-            $queryForSession->execute([
+            WHERE email = :email OR username = :email");
+            $queryForMdp->execute([
                 'email' =>  $_POST['email'] ?? NULL
             ]);
-            $username = $queryForSession->fetch()["username"];
-            $_SESSION['username'] = $username;
-
-            $queryForId = Database::getPdo()->prepare("
-            SELECT id FROM Users 
-            WHERE email = :email");
-            $queryForId->execute([
-                'email' =>  $_POST['email'] ?? NULL
-            ]);
-            $id = $queryForId->fetch()["id"];
-            $_SESSION['id'] = $id;
-
-            $queryForRole = Database::getPdo()->prepare("
-            SELECT role FROM Users 
-            WHERE email = :email");
-            $queryForRole->execute([
-                'email' =>  $_POST['email'] ?? NULL
-            ]);
-            $role = $queryForRole->fetch()["role"];
-            $_SESSION['role'] = $role;
-       }
+            $aData = $queryForMdp->fetchAll();
+            if(empty($_SESSION['username']))
+            {
+                $motDePasse = $aData[0]['mdp'];
+                if(!empty($_POST['mdp']))
+                {
+                    $mdp = password_verify($_POST['mdp'] ?? NULL, $motDePasse); 
+                }
+            }
+            if(isset($mdp) && $mdp == true)
+            {
+                echo("<script>location.href = 'admin';</script>");
+                $username = $aData[0]["username"];
+                $_SESSION['username'] = $username;
+                $id = $aData[0]["id"];
+                $_SESSION['id'] = $id;
+                $role = $aData[0]["role"];
+                $_SESSION['role'] = $role;
+            }
+        }
     }
 
     public function logout()

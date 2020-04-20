@@ -40,8 +40,8 @@ class PostManager extends Database
     public function updatePost($post,$id)
     {
         // D'ou l'utilisateur arrive
-        if(substr($_SERVER['HTTP_REFERER'],0,34) == 'http://mohamed-bouhlel.com/p5/post')
-        {
+        //if(substr($_SERVER['HTTP_REFERER'],0,34) == 'http://mohamed-bouhlel.com/p5/post')
+        //{
             //On vérifie que tous les jetons sont là
             if (isset($_SESSION['token']) AND isset($_POST['token']) AND 
             !empty($_SESSION['token']) AND !empty($_POST['token'])) {
@@ -51,15 +51,15 @@ class PostManager extends Database
                     {
                         $query = Database::getPdo()->prepare("UPDATE Posts SET title = :title, chapo = :chapo, content = :content, update_at = NOW() WHERE id = :id");
                         $query->execute([
-                            'title'   =>  htmlentities(htmlspecialchars($post->getTitle())),
-                            "chapo"   =>  htmlentities(htmlspecialchars($post->getChapo())), 
-                            "content" =>  htmlentities(htmlspecialchars($post->getContent())),
+                            'title'   =>  htmlspecialchars($post->getTitle()),
+                            "chapo"   =>  htmlspecialchars($post->getChapo()), 
+                            "content" =>  htmlspecialchars($post->getContent()),
                             "id"      =>  $id
                         ]);
                     }
                 }
             }
-        }
+        //}
         else {
             // Les token ne correspondent pas
             echo("<script>location.href = '/p5/';</script>");
@@ -69,8 +69,8 @@ class PostManager extends Database
 
     public function insertPost($post)
     {
-        if($_SERVER['HTTP_REFERER'] == 'http://mohamed-bouhlel.com/p5/posts')
-        {
+        //if($_SERVER['HTTP_REFERER'] == 'http://mohamed-bouhlel.com/p5/posts')
+        //{
             //On vérifie que tous les jetons sont là
             if (isset($_SESSION['token']) AND isset($_POST['token']) AND 
                 !empty($_SESSION['token']) AND !empty($_POST['token'])) {
@@ -80,14 +80,14 @@ class PostManager extends Database
                         $query = Database::getPdo()->prepare("INSERT INTO Posts (id_author,title,chapo, content) VALUES(:id_author,:title,:chapo,:content)");
                         $query->execute(array(
                             'id_author' => $post->getIdAuthor(),
-                            'title'     => htmlentities(htmlspecialchars($post->getTitle())),
-                            'chapo'     => htmlentities(htmlspecialchars($post->getChapo())),          
-                            'content'   => htmlentities(htmlspecialchars($post->getContent()))          
+                            'title'     => htmlspecialchars($post->getTitle()),
+                            'chapo'     => htmlspecialchars($post->getChapo()),          
+                            'content'   => htmlspecialchars($post->getContent())          
                         ));
                     }
                 }
             }
-        }
+        //}
     }
 
 
